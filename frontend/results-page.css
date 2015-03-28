@@ -1,0 +1,89 @@
+.list-item {
+    box-sizing: border-box;
+    height: 60px;
+    cursor: default;
+    background-color: white;
+    overflow: hidden;
+    border-bottom: 1px solid lightgrey;
+    transition: background 0.5s ease-in-out;
+    padding: 25px 20px 0 20px;
+}
+
+.list-header {
+    box-sizing: border-box;
+    height: 60px;
+    cursor: default;
+    background-color: #5c6bc0;
+    color: white;
+    overflow: hidden;
+    border-bottom: 1px solid lightgrey;
+    padding: 25px 20px 0 20px;
+}
+
+.list-item:hover{
+    background-color: lightgrey;
+}
+
+#list {
+    position: relative;
+    height: 200px;
+    margin:0px;
+    padding:0px;
+    will-change: transform;
+    overflow-y: auto;
+    display: block;
+    outline: none;
+}
+
+#recent-activity-div {
+    border-radius: 2px;
+    background-color: #fff;
+    height: 100%;
+    margin-bottom:10px;
+}
+
+#recent-activity-section {
+    margin: 10px 10px 10px 10px;
+    min-width: 215px;
+}
+
+#results-page-h1 {
+    font-weight: 300;
+}
+
+#recent-activity-paper-shadow {
+    background-color: white;
+}
+
+#recent-activity-image {
+    padding:5px 12px 0 0;
+    width: 32px;
+    height: 32px;
+}
+
+#recent-activity-name-and-case {
+    padding:0 0 0 5px;
+}
+
+.bold {
+    font-weight: 600;
+}
+
+body {
+    color: #333;
+    margin: 0;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+    -webkit-touch-callout: none;
+}
+
+section {
+    margin: 20px;
+}
+
+a, a:hover {
+    text-decoration: none;
+}

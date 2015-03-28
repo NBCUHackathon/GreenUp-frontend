@@ -1,0 +1,41 @@
+<link rel="import" href="../bower_components/polymer/polymer.html">
+<link rel="import" href="../bower_components/core-list/core-list.html">
+<link rel="import" href="../bower_components/paper-shadow/paper-shadow.html">
+<link rel="import" href="../bower_components/paper-dialog/paper-dialog.html">
+<link rel="import" href="../bower_components/paper-button/paper-button.html">
+
+
+<polymer-element name="results-page" id="results-page">
+    <template>
+        <link rel="stylesheet" href="results-page.css">
+
+        <section id="results-page-section">
+            <div id="results-page-div" on-core-activate="{{showResult}}">
+                <h1 id="results-page-h1">Reservation Results</h1>
+
+                <div class="list-header" horizontal layout>
+                    <div flex four class="bold">Facility Name</div>
+                    <div flex two class="bold">Offer Status</div>
+                    <div flex class="bold">Tee Offer</div>
+                </div>
+                <core-list id="list" fit>
+                    <template>
+
+                        <div class="list-item" horizontal layout>
+                                <div flex four class="bold">{{model.name}}</div>
+                                <div flex two>{{model.status}}</div>
+                                <div flex>{{model.cost}}</div>
+                        </div>
+
+                    </template>
+                </core-list>
+            </div>
+        </section>
+
+        <paper-dialog backdrop id="itemDialog">
+            <p>Some content</p>
+        </paper-dialog>
+
+    </template>
+    <script src="results-page.html.0.js"></script>
+</polymer-element>
