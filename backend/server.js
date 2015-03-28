@@ -7,16 +7,16 @@ function requestHandler(req, res) {
     res.end();
 }
 
-//require db npm package
-var mongojs = require('mongojs');
+// //require db npm package
+// var mongojs = require('mongojs');
 
-//Socket.io init
-var io = require('socket.io')(server);
+// //Socket.io init
+// var io = require('socket.io')(server);
 
-//To handle REST calls
-var request = require('request');
+// //To handle REST calls
+// var request = require('request');
 
-server.listen(9999);
+server.listen(process.env.PORT || 1337);
 
 //mongo servers
 // var golferDB = mongojs('golf', ['golfer_reservation_requests']);
@@ -24,25 +24,25 @@ server.listen(9999);
 
 
 //while connected to a client
-io.on('connection', function(socket) {
+// io.on('connection', function(socket) {
 
-	socket.on('reservation.sent', function(data){
-
-		
+// 	socket.on('reservation.sent', function(data){
 
 
-		
-
-		// golferDB.golfer_reservation_requests.findAndModify({
-  //           query: {_id:mongojs.ObjectId(doc.caseId)},
-  //           update: { $push: {"reservation_requests":doc._id}}
-  //       });
-	});
 
 
-	socket.on('reservations.get.golfer', function(data){});
 
 
-	socket.on('reservations.get.course', function(data){});
+// 		// golferDB.golfer_reservation_requests.findAndModify({
+//   //           query: {_id:mongojs.ObjectId(doc.caseId)},
+//   //           update: { $push: {"reservation_requests":doc._id}}
+//   //       });
+// 	});
 
-});
+
+// 	socket.on('reservations.get.golfer', function(data){});
+
+
+// 	socket.on('reservations.get.course', function(data){});
+
+// });
