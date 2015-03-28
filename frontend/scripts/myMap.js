@@ -1061,9 +1061,9 @@
 				url: request,
 				dataType: 'json',
 				headers: {
-					// "Access-Control-Allow-Origin": "*",
-			  //       "UserName": "Hackathon_Development",
-			  //       "Password":"6YBkHF86ut7946pDwZhp"
+					"Access-Control-Allow-Origin": "*",
+			  		"UserName": "Hackathon_Development",
+			  		"Password":"6YBkHF86ut7946pDwZhp"
 			    },
 				success: function(data, status) {
 					facilitiesInArea = data;
