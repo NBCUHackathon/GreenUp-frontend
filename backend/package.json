@@ -1,0 +1,22 @@
+{
+  "name": "golf",
+  "version": "0.0.0",
+  "description": "golf_backend",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/tylerl0706/golf.git"
+  },
+  "keywords": [
+    "golf"
+  ],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/tylerl0706/golf/issues"
+  },
+  "homepage": "https://github.com/tylerl0706/golf"
+}
