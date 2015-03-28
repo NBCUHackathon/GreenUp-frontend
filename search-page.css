@@ -1,0 +1,30 @@
+#search-page-h1 {
+    font-weight: 300;
+}
+
+#search-page-div {
+    border-radius: 2px;
+    height: 100%;
+    margin-bottom:10px;
+}
+
+section {
+    margin: 20px;
+}
+
+#zipCode {
+    font-size: 20px;
+    width: 80px;
+    margin-top: -10px;
+}
+
+.search-page-paper-shadow {
+    margin-top: 5px;
+    padding: 20px 20px 10px 20px;
+    background-color: white;
+}
+
+.questionTitle {
+    font-size: 18px;
+    font-weight: 400;
+}

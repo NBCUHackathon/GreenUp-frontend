@@ -1,0 +1,57 @@
+<link rel="import" href="../bower_components/polymer/polymer.html">
+<link rel="import" href="../bower_components/core-list/core-list.html">
+<link rel="import" href="../bower_components/paper-shadow/paper-shadow.html">
+<link rel="import" href="../bower_components/paper-dialog/paper-dialog.html">
+<link rel="import" href="../bower_components/paper-button/paper-button.html">
+<link rel="import" href="../bower_components/paper-slider/paper-slider.html">
+<link rel="import" href="../bower_components/paper-input/paper-input-decorator.html">
+<link rel="import" href="../bower_components/polymer-date-picker/polymer-date-picker.html">
+<link rel="import" href="../bower_components/d-calendar/d-calendar.html">
+
+
+<polymer-element name="search-page" id="search-page">
+    <template>
+        <link rel="stylesheet" href="search-page.css">
+
+        <section id="search-page-section">
+            <div id="search-page-div">
+                <h1 id="search-page-h1">Search for tee times</h1>
+                <paper-shadow class="search-page-paper-shadow">
+                    <div vertical layout>
+                        <div>
+                            <div class="questionTitle">Where would you like to golf?</div>
+                            <paper-input-decorator label="Zip code" id="zipCode">
+                                <input id="zipCodeInput" is="core-input" maxlength="5">
+                            </paper-input-decorator>
+                        </div>
+
+                        <div style="margin-top: 25px;">
+                            <div class="questionTitle">How many miles are you willing to travel?</div>
+                            <paper-slider min="10" max="200" value="110" pin
+                                          style=" width: 330px; margin-top: 25px;"></paper-slider>
+                        </div>
+                    </div>
+                </paper-shadow>
+
+                <paper-shadow class="search-page-paper-shadow">
+                    <div vertical layout>
+                        <template id="sandbox" is="auto-binding">
+                            <div>
+                                <d-calendar selectedDate="{{selectedDate}}" date="{{date}}" class="light-theme"
+                                            on-d-calendar-date-selected="{{dateSelected}}"></d-calendar>
+                                <d-calendar selectedDate="{{selectedDate}}"></d-calendar>
+                            </div>
+                            <div id="dateDisplay">
+                                <input id="dateinput" placeholder="Selected Date" is="core-input"
+                                       committedValue="{{selectedDate}}"></input>
+                            </div>
+                        </template>
+
+                    </div>
+                </paper-shadow>
+            </div>
+        </section>
+
+    </template>
+    <script src="search-page.html.0.js"></script>
+</polymer-element>
