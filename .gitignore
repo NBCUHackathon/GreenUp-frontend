@@ -13,6 +13,13 @@ _site
 *.sublime-*
 _data/versions
 
+
+# Jetbrains
+.idea
+
+# Java class files
+*.class
+
 #Node
 
 # Logs
