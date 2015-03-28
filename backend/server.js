@@ -19,8 +19,8 @@ var request = require('request');
 server.listen(9999);
 
 //mongo servers
-var golferDB = mongojs('golf', ['golfer_reservation_requests']);
-var courseDB = mongojs('golf', ['course_reservation_requests']);
+// var golferDB = mongojs('golf', ['golfer_reservation_requests']);
+// var courseDB = mongojs('golf', ['course_reservation_requests']);
 
 
 //while connected to a client
