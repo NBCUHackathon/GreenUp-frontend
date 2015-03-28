@@ -1,7 +1,6 @@
 #Polymer
 
 node_modules
-bower_components
 [0-9.]*/components
 polymer-all
 _site
