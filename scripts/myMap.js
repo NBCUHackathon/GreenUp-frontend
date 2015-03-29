@@ -1,5 +1,17 @@
-(function() {
-	$(document).ready(function () {
+var desiredZip = 32826;
+function checkZip () {
+	console.log('checkxin zip');
+	desiredZip = document.querySelector('#search-page').shadowRoot.querySelector('#zipCodeInput').value;
+	console.log('checking ' + desiredZip.length);
+
+	if (desiredZip.length == 5) {
+		console.log('go!');
+		socket.emit('facilities.getLatLonFromZip', {zip: desiredZip});
+	}
+}
+(function(desiredZip) {
+
+	$(document).ready(function (desiredZip) {
 		console.log('ready with jq');
 		var map;
 		var geocoder;
@@ -8,21 +20,23 @@
 		var markers = [];
 		var facilitiesInArea = [];
 		var facilityKeys = [];
-		var desiredZip = "32779";
 		var desiredLon = -81.2989;
 		var desiredLat = 28.4158;
 		var desiredDist = 25;
 		desiredDist = document.querySelector('#search-page').shadowRoot.querySelector('#radius').value;
 		console.log('desired distance : '+ desiredDist);
 
+
 		socket.emit('facilities.getLatLonFromZip', {zip: desiredZip});
 		socket.on('facilities.receiveZipFromLatLon', function(data) {
-			console.log('got lat and long' + data.lat + " " +data.lon);
+			console.log('got lat and long ' + data.lat + " " + data.lon);
 			desiredLat = data.lat;
 			deisredLon = data.lon;
+
+			socket.emit('facilities.getFacilityByLatLonAndRange', {lat: desiredLat, lon: desiredLon, range: desiredDist, zip: desiredZip});
 		});
 
-		socket.emit('facilities.getFacilityByLatLonAndRange', {lat: desiredLat, lon: desiredLon, range: desiredDist});
+		// socket.emit('facilities.getFacilityByLatLonAndRange', {lat: desiredLat, lon: desiredLon, range: desiredDist, zip: desiredZip});
 
 		//build & set up the basic map
 		function initMap() {
@@ -42,13 +56,13 @@
 		    initMap();
 		    // getFacilityByCity("Orlando", 17652, 100, 0);
 
-		    socket.emit('facilities.getFacilityByLatLonAndRange', {lat: desiredLat, lon: desiredLon, range: desiredDist});
+		    // socket.emit('facilities.getFacilityByLatLonAndRange', {lat: desiredLat, lon: desiredLon, range: 0});
 
 			//test goToCourseFunctionality
-			setTimeout(function() {
-				goToCourse(1743);
-				console.log('waited');
-			}, 3000);
+			// setTimeout(function() {
+			// 	goToCourse(1743);
+			// 	console.log('waited');
+			// }, 3000);
 
 			// //test goToCourseFunctionality
 			// setTimeout(function() {
@@ -61,28 +75,34 @@
 		// @ facilities is the obj returned by get facilities (by channel/other)
 		// @ return markers created by get facilities
 		function jsonFacilitiesToMarkers(facilities) {
+			console.log("creating markers");
+			console.log(Object.keys(facilities).length);
 
 		    for (key in facilities) {
-		        markers.push(new google.maps.Marker({
-		            position: new google.maps.LatLng(facilities[key].Latitude, facilities[key].Longitude),
-		            map: map,
-		            animation:google.maps.Animation.DROP,
-		            title: key,
-		            id: facilities[key].ID
-		        }));
+		    	console.log(facilities[key].Address.PostalCode);
+		        if (facilities[key].Address.PostalCode == desiredZip) {
+			        markers.push(new google.maps.Marker({
+			            position: new google.maps.LatLng(facilities[key].Latitude, facilities[key].Longitude),
+			            map: map,
+			            animation:google.maps.Animation.DROP,
+			            title: key,
+			            id: facilities[key].ID
+			        }));
+			    }
 		    }
 		    return markers;
 		}
 
 		//Given an array of gmap markers, add it to global map instance
 		function loadMarkers(markerArray) {
-		    console.log('loaderMarkers called');
+		    console.log('loaderMarkers called with '+ markerArray.length + " entries");
 		    if (markerArray.length > 0) {
 		        for (var i = 0; i < markers.length; i++) {
-		            addMarkerEvent(markerArray[i]);
-		            markerArray[i].setMap(map);
+	        		addMarkerEvent(markerArray[i]);
+	            	markerArray[i].setMap(map);
 		        }
 		    }
+		    console.log('loaderMarkers finished');
 		}
 
 		// Given marker attach a click listener
@@ -122,15 +142,10 @@
 			loadMarkers(jsonFacilitiesToMarkers(factilitiesInArea));
 		}
 
-		function goToZipCenter(zipCode) {
-		    geocoder.geocode({'address': zipCode}, function(results, status) {
-				if (status == google.maps.GeocoderStatus.OK) {
-					//Got result, center the map and put it out there
-					console.log('got ' + results);
-					console.log(results[0].geomertry.location);
-					map.setCenter(results[0].geometry.location);
-				}
-		    });
+		function goToZipCenter() {
+			//Got result, center the map and put it out there
+			console.log(desiredLat + " " +desiredLon);
+			map.panTo(new google.maps.LatLng(desiredLat, desiredLon));
 		}
 
 		//courseID is the number key of the course
@@ -142,11 +157,21 @@
 			}
 		}
 
+		function checkZip () {
+			desiredZip = document.querySelector('#search-page').shadowRoot.querySelector('#zipCodeInput').value;
+			console.log('checking ' + desiredZip.length);
+			if (desiredZip.length == 5) { 
+				socket.emit('facilities.getLatLonFromZip', {zip: desiredZip});
+			}
+		}
+
 		google.maps.event.addDomListener(window, 'load', initialize);
 
 		//recieve the facilities and load the markers
 		socket.on('facilities.receiveFacilitiesByLatLonRange', function(data) {
+			console.log(data);
 			console.log('recd data');
+			goToZipCenter();
 			loadMarkers(jsonFacilitiesToMarkers(data.facilities));
 		});
 	});
