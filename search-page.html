@@ -33,7 +33,7 @@
 
                         <div style="margin-top: 25px;">
                             <div class="questionTitle">How many miles are you willing to travel?</div>
-                            <paper-slider min="10" max="200" value="110" pin editable id="radius"
+                            <paper-slider min="10" max="200" value="110" pin id="radius"
                                           style=" width: 330px; margin-top: 25px;"></paper-slider>
                         </div>
                     </div>
@@ -48,21 +48,25 @@
                 <paper-shadow class="search-page-paper-shadow" style="margin-top: 30px;">
                     <div vertical layout>
                         <div class="questionTitle">When would you like to golf?</div>
-                        <div horizontal layout wrap style="width: 400px">
+                        <div vertical layout wrap style="width: 400px">
                             <template id="sandbox" is="auto-binding">
-                                <div style="margin-left: -20px;">
+                                <div>
                                     <d-calendar selectedDate="{{selectedDate}}" date="{{date}}" class="light-theme"
                                                 on-d-calendar-date-selected="{{dateSelected}}"></d-calendar>
                                 </div>
                             </template>
 
-                            <div style="margin: 50px 0 0 0;">
-                                <div class="questionTitle">Start Time</div>
-                                <nemento-timepicker ampm="false" valign="bottom" step="10"
-                                                    id="startTime"></nemento-timepicker>
-                                <div class="questionTitle" style="margin-top: 30px;">End Time</div>
-                                <nemento-timepicker ampm="false" valign="bottom" step="10"
-                                                    id="endTime"></nemento-timepicker>
+                            <div horizontal layout style="margin-left: 20px;">
+                                <div>
+                                    <div class="questionTitle">Start Time</div>
+                                    <nemento-timepicker ampm="false" valign="bottom" step="10"
+                                                        id="startTime" style="margin-left: -10px;width: 95px;padding-right: 50px;"></nemento-timepicker>
+                                </div>
+                                <div>
+                                    <div class="questionTitle">End Time</div>
+                                    <nemento-timepicker ampm="false" valign="bottom" step="10"
+                                                        id="endTime" style="margin-left: -10px;width: 95px;padding-right: 50px;"></nemento-timepicker>
+                                </div>
                             </div>
                         </div>
 
@@ -73,7 +77,7 @@
                     <div vertical layout>
                         <div style="margin-top: 25px;">
                             <div class="questionTitle">What is the most you are willing to pay?</div>
-                            <paper-slider min="10" max="200" value="110" pin editable id="maxPrice"
+                            <paper-slider min="10" max="200" value="110" pin id="maxPrice"
                                           style=" width: 330px; margin-top: 25px;"></paper-slider>
                         </div>
                     </div>
