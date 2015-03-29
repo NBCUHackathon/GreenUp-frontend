@@ -128,3 +128,12 @@ a, a:hover {
     font-weight: 600;
     border: 1px solid lightgrey;
 }
+
+paper-checkbox::shadow #ink[checked] {
+    color: #B6AD93;
+}
+
+paper-checkbox::shadow #checkbox.checked {
+    background-color: #B6AD93;
+    border-color: #B6AD93;
+}
