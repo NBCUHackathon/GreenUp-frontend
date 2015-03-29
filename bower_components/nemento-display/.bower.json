@@ -1,0 +1,45 @@
+{
+  "name": "nemento-display",
+  "version": "0.0.1",
+  "private": true,
+  "authors": [
+    "Maciej Chmielarski <hello@evenemento.co>"
+  ],
+  "description": "",
+  "keywords": [
+    "nemento",
+    "time",
+    "timepicker",
+    "polymer",
+    "web-components"
+  ],
+  "ignore": [
+    ".jshintrc",
+    ".bowerrc",
+    "test",
+    ".gitignore",
+    "tests"
+  ],
+  "license": "MIT",
+  "main": "nemento-display.html",
+  "dependencies": {
+    "polymer": "Polymer/polymer",
+    "core-a11y-keys": "Polymer/core-a11y-keys",
+    "core-dropdown": "Polymer/core-dropdown",
+    "paper-icon-button": "Polymer/paper-icon-button",
+    "core-animated-pages": "Polymer/core-animated-pages"
+  },
+  "devDependencies": {
+    "polymer-test-tools": "Polymer/polymer-test-tools"
+  },
+  "homepage": "https://github.com/nemento/nemento-display",
+  "_release": "0.0.1",
+  "_resolution": {
+    "type": "version",
+    "tag": "v0.0.1",
+    "commit": "482f3e68b07f482239a855328f9215daa69fa318"
+  },
+  "_source": "git://github.com/nemento/nemento-display.git",
+  "_target": "0.0.1",
+  "_originalSource": "nemento/nemento-display"
+}
