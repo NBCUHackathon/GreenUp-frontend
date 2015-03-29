@@ -17,13 +17,14 @@ body {
 	color: white;
 }
 
-#search {
+#search, #login {
     background-color: #4285F4;
 }
 
 #results {
     background-color: #3B78E7;
 }
+
 
 #login {
 	background: #356ccf;
@@ -43,3 +44,7 @@ body {
 	background: #356ccf;
 }
 
+.open-below {
+    top: 0px;
+    color: black;
+}

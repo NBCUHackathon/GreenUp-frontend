@@ -4,7 +4,6 @@
 Polymer('results-page', {
 
     domReady: function () {
-
         this.$.list.data = [{"name":"3 Golf 5 You", "cost":"87.50", "status": "Pending", "date": "Mon, Jan 1"},
             {"name":"Pro Golfer", "cost":"32.25", "status": "Accepted", "date": "Wed, March 7"}];
 
