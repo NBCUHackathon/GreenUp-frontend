@@ -55,6 +55,7 @@
     "paper-shadow": "^0.5",
     "core-resizable": "^0.5",
     "core-transition": "master",
-    "font-roboto": "master"
+    "font-roboto": "master",
+    "core-overlay": "^0.5"
   }
 }
