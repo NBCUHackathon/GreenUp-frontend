@@ -39,7 +39,7 @@
                         <core-list id="listAccepted" fit>
                             <template>
                                 <div class="list-item" horizontal layout>
-                                    <div flex two class="bold" style="word-wrap: break-word;">{{model.name}}</div>
+                                    <div flex two class="bold" style="word-wrap: break-word; margin-top: -5px;">{{model.name}}</div>
                                     <div flex two>{{model.time}}<br/>{{model.date}}</div>
                                     <div flex id="check"><paper-checkbox class="check" on-change="{{updateList}}" modelname="{{model.name}}" modeldate="{{model.date}}" modeltime="{{model.time}}" modelcost="{{model.cost}}"></paper-checkbox></div>
                                     <div flex id="cost">${{model.price}}</div>
@@ -63,7 +63,7 @@
                         <core-list id="listPending" fit>
                             <template>
                                 <div class="list-item" horizontal layout>
-                                    <div flex three class="bold" style="word-wrap: break-word;">{{model.name}}</div>
+                                    <div flex three class="bold" style="word-wrap: break-word; margin-top: -5px;">{{model.name}}</div>
                                     <div flex two>{{model.time}}<br/>{{model.date}}</div>
                                     <div flex>${{model.price}}</div>
                                 </div>
@@ -86,7 +86,7 @@
                         <core-list id="listDeclined" fit>
                             <template>
                                 <div class="list-item" horizontal layout style="padding: 30px;">
-                                    <div flex three class="bold" style="word-wrap: break-word;">{{model.name}}</div>
+                                    <div flex three class="bold" style="word-wrap: break-word; margin-top: -5px;">{{model.name}}</div>
                                     <div flex two>{{model.time}}<br/>{{model.date}}</div>
                                     <div flex>${{model.price}}</div>
                                 </div>
