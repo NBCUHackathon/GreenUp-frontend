@@ -95,20 +95,20 @@ Polymer('results-page', {
 
     domReady: function () {
        this.socket.on("send.reservations.golfer.accepted", function(data) {
-            accepted = data;
+            if(data.length > 0) accepted = data;
             console.log("accepted " + JSON.stringify(accepted));
            thisVar.updateLists();
         });
 
         this.socket.on("send.reservations.golfer.pending", function(data) {
-            pending = data;
+            if(data.length > 0) pending = data;
             console.log("pending" + JSON.stringify(pending));
             thisVar.updateLists();
 
         });
 
         this.socket.on("send.reservations.golfer.declined", function(data) {
-            declined = data;
+            if(data.length > 0) declined = data;
             console.log("declined");
             thisVar.updateLists();
         });
@@ -209,12 +209,12 @@ Polymer('results-page', {
         };
 
         title = "<div style='font-weight: 600;font-size: 24px;padding-bottom: 20px;'>" + data.name + "</div>";
-        price = "<div style='float: left;'>$" + data.cost + "</div>";
+        price = "<div style='float: left;'>$" + data.price + "</div>";
         status = "<div style='float: right;'>" + data.status + "</div>";
         container = "<div style='width: 300px;'>" + price + status + "</div>";
 
         if(user.isAuthenticated === true) {
-            if(data.status === 'Accepted') {
+            if(data.status === 'accepted') {
                 var button = "<paper-button raised style='margin-top: 25px; width: 100%; background-color: #03a9f4; color: white;' on-click='{{book}}'>BOOK NOW!</paper-button>";
                 dia.innerHTML = title + container + button;
             } else {
