@@ -15,20 +15,13 @@
 		desiredDist = document.querySelector('#search-page').shadowRoot.querySelector('#radius').value;
 		console.log('desired distance : '+ desiredDist);
 
-		socket.emit('facilities.getAllInCountry', {country: "US"});
-		//receive all for zip code analysis (absolutely the worst way to do this, probably)
-		socket.on('facilities.receiveAllInCountry', function(data) {
-			for(courseKey in data.facilities) {
-				if(data.facilities[courseKey].Address.PostalCode === desiredZip) {
-					desiredLat = data.facilities[courseKey].Latitude;
-					desiredLon = data.facilities[courseKey].Longitude;
-					console.log("found zip " + desiredZip + " at Lat :" +desiredLat +" Lon: "+desiredLon); 
-					//get the relvant facilities
-					socket.emit('facilities.getFacilityByLatLonAndRange', {lat: desiredLat, lon: desiredLon, range: desiredDist});
-					break;
-				}
-			}
+		socket.emit('facilities.getLatLonFromZip', {zip: desiredZip});
+		socket.on('facilities.receiveZipFromLatLon', function(data) {
+			desiredLat = data.lat;
+			deisredLon = data.lon;
 		});
+
+		socket.emit('facilities.getFacilityByLatLonAndRange', {lat: desiredLat, lon: desiredLon, range: desiredDist});
 
 		//build & set up the basic map
 		function initMap() {
