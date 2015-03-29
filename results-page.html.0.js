@@ -1,3 +1,22 @@
+var socket = io('http://45.55.134.215:9999');
+var accepted = [];
+var pending = [];
+var declined = [];
+
+//socket.on("send.reservations.golfer.accepted", function(data) {
+//    accepted = data;
+//    console.log("accepted");
+//});
+//
+//socket.on("send.reservations.golfer.pending", function(data) {
+//    pending = data;
+//    console.log("pending");
+//});
+//
+//socket.on("send.reservations.golfer.declined", function(data) {
+//    declined = data;
+//    console.log("declined");
+//});
 /**
  * Created by isabella on 3/28/15.
  */
@@ -5,38 +24,94 @@ Polymer('results-page', {
 
     listToBook: [],
 
+    socket: io('http://45.55.134.215:9999'),
+
+    ready: function() {
+        //this.socket = socket;
+        //console.log(this.socket);
+
+        this.socket.on("accepted", function(data) {
+            accepted = data;
+            console.log("accepted");
+            this.updateLists();
+        });
+
+        this.socket.on("send.reservations.golfer.pending", function(data) {
+            pending = data;
+            console.log("pending");
+            this.updateLists();
+        });
+
+        this.socket.on("send.reservations.golfer.declined", function(data) {
+            declined = data;
+            console.log("declined");
+            this.updateLists();
+        });
+
+
+    },
+
     domReady: function () {
-        this.$.listAccepted.data = [{
-            "name": "3 Golf 5 You",
-            "cost": "87.50",
-            "status": "Accepted",
-            "date": "Mon, Jan 1",
-            "time": "02:18"
-        },
-            {"name": "Pro Golfer1", "cost": "32.25", "status": "Accepted", "date": "Wed, March 7", "time": "22:38"},
-            {"name": "Pro Golfer2", "cost": "32.25", "status": "Accepted", "date": "Wed, March 7", "time": "22:38"},
-            {"name": "Pro Golfer3", "cost": "32.25", "status": "Accepted", "date": "Wed, March 7", "time": "22:38"}];
+        //this.socket.on("send.reservations.golfer.accepted", function(data) {
+        //    accepted = data;
+        //    console.log("accepted");
+        //});
+        //
+        //this.socket.on("send.reservations.golfer.pending", function(data) {
+        //    pending = data;
+        //    console.log("pending");
+        //});
+        //
+        //this.socket.on("send.reservations.golfer.declined", function(data) {
+        //    declined = data;
+        //    console.log("declined");
+        //});
+        //this.$.listAccepted.data = [{
+        //    "name": "3 Golf 5 You",
+        //    "cost": "87.50",
+        //    "status": "Accepted",
+        //    "date": "Mon, Jan 1",
+        //    "time": "02:18"
+        //},
+        //    {"name": "Pro Golfer1", "cost": "32.25", "status": "Accepted", "date": "Wed, March 7", "time": "22:38"},
+        //    {"name": "Pro Golfer2", "cost": "32.25", "status": "Accepted", "date": "Wed, March 7", "time": "22:38"},
+        //    {"name": "Pro Golfer3", "cost": "32.25", "status": "Accepted", "date": "Wed, March 7", "time": "22:38"}];
+        //
+        //this.$.listPending.data = [{
+        //    "name": "3 Golf 5 You",
+        //    "cost": "87.50",
+        //    "status": "Pending",
+        //    "date": "Mon, Jan 1",
+        //    "time": "02:18"
+        //},
+        //    {"name": "Pro Golfer1", "cost": "32.25", "status": "Pending", "date": "Wed, March 7", "time": "22:38"},
+        //    {"name": "Pro Golfer2", "cost": "32.25", "status": "Pending", "date": "Wed, March 7", "time": "22:38"},
+        //    {"name": "Pro Golfer3", "cost": "32.25", "status": "Pending", "date": "Wed, March 7", "time": "22:38"}];
+        //
+        //this.$.listDeclined.data = [{
+        //    "name": "Rich Golfing",
+        //    "cost": "1.35",
+        //    "status": "Declined",
+        //    "date": "Mon, Jan 1",
+        //    "time": "23:18"
+        //},
+        //    {"name": "Golf Master", "cost": "2.34", "status": "Declined", "date": "Wed, March 7", "time": "16:42"}];
 
-        this.$.listPending.data = [{
-            "name": "3 Golf 5 You",
-            "cost": "87.50",
-            "status": "Pending",
-            "date": "Mon, Jan 1",
-            "time": "02:18"
-        },
-            {"name": "Pro Golfer1", "cost": "32.25", "status": "Pending", "date": "Wed, March 7", "time": "22:38"},
-            {"name": "Pro Golfer2", "cost": "32.25", "status": "Pending", "date": "Wed, March 7", "time": "22:38"},
-            {"name": "Pro Golfer3", "cost": "32.25", "status": "Pending", "date": "Wed, March 7", "time": "22:38"}];
+        if(accepted.length === 0) accepted.push({"name": "No accepted offers"});
+        this.$.listAccepted.data = accepted;
 
-        this.$.listDeclined.data = [{
-            "name": "Rich Golfing",
-            "cost": "1.35",
-            "status": "Declined",
-            "date": "Mon, Jan 1",
-            "time": "23:18"
-        },
-            {"name": "Golf Master", "cost": "2.34", "status": "Declined", "date": "Wed, March 7", "time": "16:42"}];
+        if(pending.length === 0) pending.push({"name": "No pending offers"});
+        this.$.listPending.data = pending;
 
+        if(declined.length === 0) declined.push({"name": "No declined offers"});
+        this.$.listDeclined.data = declined;
+    },
+
+    updateLists: function() {
+        this.$.listAccepted.data = accepted;
+        this.$.listPending.data = pending;
+        this.$.listDeclined.data = declined;
+        console.log("updated list");
     },
 
     showResult: function () {

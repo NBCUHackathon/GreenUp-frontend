@@ -33,7 +33,9 @@
     "core-collapse": "Polymer/core-collapse#~0.5.5",
     "paper-item": "Polymer/paper-item#~0.5.5",
     "paper-checkbox": "Polymer/paper-checkbox#~0.5.5",
-    "nemento-timepicker": "https://github.com/nemento/nemento-timepicker.git#~0.0.2"
+    "nemento-timepicker": "https://github.com/nemento/nemento-timepicker.git#~0.0.2",
+    "core-animated-pages": "Polymer/core-animated-pages#~0.5.5",
+    "paper-toast": "Polymer/paper-toast#~0.5.5"
   },
   "resolutions": {
     "polymer": "~0.5.5",
@@ -56,6 +58,6 @@
     "core-resizable": "^0.5",
     "core-transition": "master",
     "font-roboto": "master",
-    "core-overlay": "^0.5"
+    "core-overlay": "master"
   }
 }
