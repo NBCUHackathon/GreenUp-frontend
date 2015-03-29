@@ -151,12 +151,12 @@ Polymer('results-page', {
         };
 
         title = "<div style='font-weight: 600;font-size: 24px;padding-bottom: 20px;'>" + data.name + "</div>";
-        price = "<div style='float: left;'>$" + data.cost + "</div>";
+        price = "<div style='float: left;'>$" + data.price + "</div>";
         status = "<div style='float: right;'>" + data.status + "</div>";
         container = "<div style='width: 300px;'>" + price + status + "</div>";
 
         if(user.isAuthenticated === true) {
-            if(data.status === 'Accepted') {
+            if(data.status === 'accepted') {
                 var button = "<paper-button raised style='margin-top: 25px; width: 100%; background-color: #03a9f4; color: white;' on-click='{{book}}'>BOOK NOW!</paper-button>";
                 dia.innerHTML = title + container + button;
             } else {
