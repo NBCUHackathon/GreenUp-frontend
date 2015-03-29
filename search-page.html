@@ -1,3 +1,6 @@
+<meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+<meta name="mobile-web-app-capable" content="yes">
+
 <link rel="import" href="bower_components/polymer/polymer.html">
 <link rel="import" href="bower_components/core-list/core-list.html">
 <link rel="import" href="bower_components/core-input/core-input.html">
@@ -11,6 +14,7 @@
 <script src="../moment/moment.js"></script>
 
 <link rel="import" href="bower_components/nemento-timepicker/nemento-timepicker.html">
+<script src="initSocket.js"></script>
 
 
 <polymer-element name="search-page" id="search-page">
@@ -18,7 +22,6 @@
         <link rel="stylesheet" href="search-page.css">
         <section id="search-page-section">
             <div id="search-page-div">
-                <h1 id="search-page-h1">Search for tee times</h1>
                 <paper-shadow class="search-page-paper-shadow">
                     <div vertical layout>
                         <div>
@@ -30,8 +33,10 @@
 
                         <div style="margin-top: 25px;">
                             <div class="questionTitle">How many miles are you willing to travel?</div>
-                            <paper-slider min="5" max="200" value="10" pin id="radius"
-                                          style="width: 330px; margin-top: 25px;" onkeyup="checkDist()"></paper-slider>
+
+                            <paper-slider min="5" max="200" value="10" pin editable id="radius"
+                                          style=" width: 330px; margin-top: 25px;" onkeyup="checkDist()"></paper-slider>
+
                         </div>
                     </div>
                 </paper-shadow>
@@ -45,7 +50,7 @@
                 <paper-shadow class="search-page-paper-shadow" style="margin-top: 30px;">
                     <div vertical layout>
                         <div class="questionTitle">When would you like to golf?</div>
-                        <div horizontal layout>
+                        <div horizontal layout wrap style="width: 400px">
                             <template id="sandbox" is="auto-binding">
                                 <div style="margin-left: -20px;">
                                     <d-calendar selectedDate="{{selectedDate}}" date="{{date}}" class="light-theme"
@@ -53,7 +58,7 @@
                                 </div>
                             </template>
 
-                            <div style="margin: 50px 0 0 20px;">
+                            <div style="margin: 50px 0 0 0;">
                                 <div class="questionTitle">Start Time</div>
                                 <nemento-timepicker ampm="false" valign="bottom" step="10"
                                                     id="startTime"></nemento-timepicker>
@@ -63,6 +68,16 @@
                             </div>
                         </div>
 
+                    </div>
+                </paper-shadow>
+
+                <paper-shadow class="search-page-paper-shadow" style="margin-top: 30px;">
+                    <div vertical layout>
+                        <div style="margin-top: 25px;">
+                            <div class="questionTitle">What is the most you are willing to pay?</div>
+                            <paper-slider min="10" max="200" value="110" pin editable id="maxPrice"
+                                          style=" width: 330px; margin-top: 25px;"></paper-slider>
+                        </div>
                     </div>
                 </paper-shadow>
 

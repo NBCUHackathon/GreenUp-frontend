@@ -1,3 +1,6 @@
+<meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+<meta name="mobile-web-app-capable" content="yes">
+
 <link rel="import" href="bower_components/polymer/polymer.html">
 <link rel="import" href="bower_components/core-list/core-list.html">
 <link rel="import" href="bower_components/paper-shadow/paper-shadow.html">
@@ -7,7 +10,8 @@
 <link rel="import"
       href="bower_components/paper-dropdown/paper-dropdown.html">
 <link rel="import" href="x-trigger.html">
-
+<script src="scripts/socket.io.js"></script>
+<script src="initSocket.js"></script>
 
 <polymer-element name="results-page" id="results-page">
     <template>
@@ -16,16 +20,15 @@
         <section id="results-page-section">
             <div id="results-page-div">
                 <!--on-core-activate="{{showResult}}"-->
-                <h1 id="results-page-h1">Offer Results</h1>
 
                 <div vertical layout>
-                    <paper-button raised style="background-color: white; color: #6b499f; font-size: 16px; height: 30px; line-height: 10px; margin-top: -5px;" on-click="{{ updateLists }}">Refresh</paper-button>
+                    <!--<paper-button raised style="background-color: white" on-click="{{ updateLists }}">Refresh</paper-button>-->
 
                     <!-- Accepted Reservations -->
                     <div style="margin-bottom: 40px;">
                         <div class="list-type" horizontal layout>
                             <div flex>Accepted Offers</div>
-                            <paper-button raised style="background-color: white; color: #6b499f; font-size: 16px; height: 30px; line-height: 10px; margin-top: -5px;" on-click="{{ book }}">book selected</paper-button>
+                            <paper-button raised style="  background-color: #6C9A33; color: white; font-size: 16px; height: 30px; line-height: 10px; margin-top: -5px;" on-click="{{ book }}">book selected</paper-button>
                         </div>
                         <div class="list-header" horizontal layout>
                             <div flex two class="bold">Facility Name</div>
@@ -41,9 +44,11 @@
                                     <div flex two>{{model.time}}&nbsp;&nbsp;&nbsp;{{model.date}}</div>
                                     <div flex style="margin-top: -5px;">{{model.status}}</div>
                                     <div flex id="check"><paper-checkbox class="check" on-change="{{updateList}}" modelname="{{model.name}}" modeldate="{{model.date}}" modeltime="{{model.time}}" modelcost="{{model.cost}}"></paper-checkbox></div>
-                                    <div flex id="cost">${{model.cost}}</div>
+                                    <div flex id="cost">${{model.price}}</div>
                                 </div>
                             </template>
+
+                            <div id="defaultAccepted" style="margin-top: -200px;padding: 25px;background-color: white;font-weight: 600;">No accepted offers</div>
                         </core-list>
                     </div>
 
@@ -64,9 +69,11 @@
                                     <div flex three class="bold">{{model.name}}</div>
                                     <div flex two>{{model.time}}&nbsp;&nbsp;&nbsp;{{model.date}}</div>
                                     <div flex two>{{model.status}}</div>
-                                    <div flex>${{model.cost}}</div>
+                                    <div flex>${{model.price}}</div>
                                 </div>
                             </template>
+
+                            <div id="defaultPending" style="margin-top: -200px;padding: 25px;background-color: white;font-weight: 600;">No pending offers</div>
                         </core-list>
                     </div>
 
@@ -87,10 +94,11 @@
                                     <div flex three class="bold">{{model.name}}</div>
                                     <div flex two>{{model.time}}&nbsp;&nbsp;&nbsp;{{model.date}}</div>
                                     <div flex two>{{model.status}}</div>
-                                    <div flex>${{model.cost}}</div>
+                                    <div flex>${{model.price}}</div>
                                 </div>
                             </template>
                         </core-list>
+                        <div id="defaultDeclined" style="margin-top: -200px;padding: 25px;background-color: white;font-weight: 600;">No declined offers</div>
                     </div>
 
                 </div>

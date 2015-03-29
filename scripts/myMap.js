@@ -19,6 +19,7 @@ function checkDist () {
 		socket.emit('facilities.getLatLonFromZip', {zip: desiredZip});
 	}
 }
+
 (function(desiredZip, desiredDist) {
 
 	$(document).ready(function (desiredZip, desiredDist) {
@@ -122,33 +123,6 @@ function checkDist () {
 		        court_id = marker.id;
 		        infowindow.open(map,this);
 		    });
-		}
-
-		//get all the facilities in the given city
-		function getFacilityByCity(cityName, channelId, numResultsDesired, numSkip) {
-			// var request = "https://sandbox.api.gnsvc.com/rest/channel/"+channelId+"/facilities?q=list&skip="+numSkip+"&take="+numResultsDesired;
-
-			// $.ajax({
-			// 	type: "GET",
-			// 	url: request,
-			// 	dataType: 'json',
-			// 	headers: {
-			// 		"Access-Control-Allow-Origin": "*",
-			//   		"UserName": "Hackathon_Development",
-			//   		"Password":"6YBkHF86ut7946pDwZhp"
-			//     },
-			// 	success: function(data, status) {
-			// 		facilitiesInArea = data;
-			// 		console.log(data);
-			// 		return console.log('success!');
-			// 	},
-			// 	error: function(xhr, desc, err) {
-			// 		console.log(xhr);
-			// 		console.log("Details: " + desc + "\nError:" + err);
-			// 		return console.log('did not work...');
-			// 	}
-			// });
-			loadMarkers(jsonFacilitiesToMarkers(factilitiesInArea));
 		}
 
 		function goToZipCenter() {

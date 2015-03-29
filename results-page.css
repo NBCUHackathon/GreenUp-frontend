@@ -17,7 +17,7 @@
     box-sizing: border-box;
     height: 32px;
     cursor: default;
-    background-color: #b0a7aa;
+    background-color: #B6AD93;
     color: white;
     overflow: hidden;
     border-bottom: 1px solid lightgrey;
@@ -119,4 +119,21 @@ a, a:hover {
 
 .check {
     margin-left: 12px;
+}
+
+.defaultDeclined, .defaultAccepted, .defaultPending {
+    height: 100%;
+    background-color: white;
+    padding: 25px;
+    font-weight: 600;
+    border: 1px solid lightgrey;
+}
+
+paper-checkbox::shadow #ink[checked] {
+    color: #B6AD93;
+}
+
+paper-checkbox::shadow #checkbox.checked {
+    background-color: #B6AD93;
+    border-color: #B6AD93;
 }
