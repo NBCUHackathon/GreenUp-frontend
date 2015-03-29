@@ -89,3 +89,12 @@ body {
     transition: all 1s ease;
     opacity: 0;
 }
+
+
+#cred {
+    position: absolute;
+    bottom: 10px;
+    font-size: 14px;
+    color: grey;
+    text-align: center;
+}
