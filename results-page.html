@@ -7,7 +7,8 @@
 <link rel="import"
       href="bower_components/paper-dropdown/paper-dropdown.html">
 <link rel="import" href="x-trigger.html">
-
+<script src="scripts/socket.io.js"></script>
+<script src="initSocket.js"></script>
 
 <polymer-element name="results-page" id="results-page">
     <template>
@@ -19,7 +20,7 @@
                 <h1 id="results-page-h1">Offer Results</h1>
 
                 <div vertical layout>
-                    <paper-button raised style="background-color: white; color: #6b499f; font-size: 16px; height: 30px; line-height: 10px; margin-top: -5px;" on-click="{{ updateLists }}">Refresh</paper-button>
+                    <paper-button raised style="background-color: white" on-click="{{ updateLists }}">Refresh</paper-button>
 
                     <!-- Accepted Reservations -->
                     <div style="margin-bottom: 40px;">
