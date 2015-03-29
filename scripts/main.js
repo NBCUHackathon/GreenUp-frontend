@@ -11,8 +11,9 @@ function showPage(index) {
     document.querySelector("core-animated-pages").selected = index;
 
     if(index === 1) {
-        var socket = io('http://45.55.134.215:9999');
+        //var socket = io('http://45.55.134.215:9999');
         socket.emit("reservations.get.golfer");
+
     }
 }
 

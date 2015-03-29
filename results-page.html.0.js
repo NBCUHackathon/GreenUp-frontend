@@ -1,4 +1,4 @@
-var socket = io('http://45.55.134.215:9999');
+//var socket = io('http://45.55.134.215:9999');
 var accepted = [];
 var pending = [];
 var declined = [];
@@ -20,52 +20,67 @@ var declined = [];
 /**
  * Created by isabella on 3/28/15.
  */
+
+var thisVar;
+
 Polymer('results-page', {
 
     listToBook: [],
 
-    socket: io('http://45.55.134.215:9999'),
+    socket: socket,
 
     ready: function() {
-        //this.socket = socket;
+        this.socket = socket;
+        thisVar = this;
         //console.log(this.socket);
 
-        this.socket.on("accepted", function(data) {
-            accepted = data;
-            console.log("accepted");
-            this.updateLists();
-        });
-
-        this.socket.on("send.reservations.golfer.pending", function(data) {
-            pending = data;
-            console.log("pending");
-            this.updateLists();
-        });
-
-        this.socket.on("send.reservations.golfer.declined", function(data) {
-            declined = data;
-            console.log("declined");
-            this.updateLists();
-        });
-
-
-    },
-
-    domReady: function () {
-        //this.socket.on("send.reservations.golfer.accepted", function(data) {
+        //this.socket.on("accepted", function(data) {
         //    accepted = data;
         //    console.log("accepted");
+        //    this.updateLists();
         //});
         //
         //this.socket.on("send.reservations.golfer.pending", function(data) {
         //    pending = data;
         //    console.log("pending");
+        //    this.updateLists();
         //});
         //
         //this.socket.on("send.reservations.golfer.declined", function(data) {
         //    declined = data;
         //    console.log("declined");
+        //    this.updateLists();
         //});
+
+
+    },
+
+    updateLists: function() {
+        this.$.listAccepted.data = accepted;
+        this.$.listPending.data = pending;
+        this.$.listDeclined.data = declined;
+        console.log("updated list");
+    },
+
+    domReady: function () {
+       this.socket.on("send.reservations.golfer.accepted", function(data) {
+            accepted = data;
+            console.log("accepted " + JSON.stringify(accepted));
+           thisVar.updateLists();
+        });
+
+        this.socket.on("send.reservations.golfer.pending", function(data) {
+            pending = data;
+            console.log("pending" + JSON.stringify(pending));
+            thisVar.updateLists();
+
+        });
+
+        this.socket.on("send.reservations.golfer.declined", function(data) {
+            declined = data;
+            console.log("declined");
+            thisVar.updateLists();
+        });
         //this.$.listAccepted.data = [{
         //    "name": "3 Golf 5 You",
         //    "cost": "87.50",
@@ -107,12 +122,12 @@ Polymer('results-page', {
         this.$.listDeclined.data = declined;
     },
 
-    updateLists: function() {
-        this.$.listAccepted.data = accepted;
-        this.$.listPending.data = pending;
-        this.$.listDeclined.data = declined;
-        console.log("updated list");
-    },
+    //updateLists: function() {
+    //    this.$.listAccepted.data = accepted;
+    //    this.$.listPending.data = pending;
+    //    this.$.listDeclined.data = declined;
+    //    console.log("updated list");
+    //},
 
     showResult: function () {
         console.log(event.detail);
