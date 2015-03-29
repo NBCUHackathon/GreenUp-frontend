@@ -33,16 +33,14 @@
                         <div class="list-header" horizontal layout>
                             <div flex two class="bold">Facility</div>
                             <div flex two class="bold">Time</div>
-                            <div flex class="bold">Status</div>
                             <div flex class="bold">Book</div>
                             <div flex class="bold">Offer</div>
                         </div>
                         <core-list id="listAccepted" fit>
                             <template>
                                 <div class="list-item" horizontal layout>
-                                    <div flex two class="bold">{{model.name}}</div>
-                                    <div flex two>{{model.time}}&nbsp;&nbsp;&nbsp;{{model.date}}</div>
-                                    <div flex style="margin-top: -5px;">{{model.status}}</div>
+                                    <div flex two class="bold" style="word-wrap: break-word;">{{model.name}}</div>
+                                    <div flex two>{{model.time}}<br/>{{model.date}}</div>
                                     <div flex id="check"><paper-checkbox class="check" on-change="{{updateList}}" modelname="{{model.name}}" modeldate="{{model.date}}" modeltime="{{model.time}}" modelcost="{{model.cost}}"></paper-checkbox></div>
                                     <div flex id="cost">${{model.price}}</div>
                                 </div>
@@ -60,15 +58,13 @@
                         <div class="list-header" horizontal layout>
                             <div flex three class="bold">Facility</div>
                             <div flex two class="bold">Time</div>
-                            <div flex two class="bold">Status</div>
                             <div flex class="bold">Offer</div>
                         </div>
                         <core-list id="listPending" fit>
                             <template>
                                 <div class="list-item" horizontal layout>
-                                    <div flex three class="bold">{{model.name}}</div>
+                                    <div flex three class="bold" style="word-wrap: break-word;">{{model.name}}</div>
                                     <div flex two>{{model.time}}&nbsp;&nbsp;&nbsp;{{model.date}}</div>
-                                    <div flex two>{{model.status}}</div>
                                     <div flex>${{model.price}}</div>
                                 </div>
                             </template>
@@ -85,15 +81,13 @@
                         <div class="list-header" horizontal layout>
                             <div flex three class="bold">Facility</div>
                             <div flex two class="bold">Time</div>
-                            <div flex two class="bold">Status</div>
                             <div flex class="bold">Offer</div>
                         </div>
                         <core-list id="listDeclined" fit>
                             <template>
-                                <div class="list-item" horizontal layout>
-                                    <div flex three class="bold">{{model.name}}</div>
+                                <div class="list-item" horizontal layout style="padding: 30px;">
+                                    <div flex three class="bold" style="word-wrap: break-word;">{{model.name}}</div>
                                     <div flex two>{{model.time}}&nbsp;&nbsp;&nbsp;{{model.date}}</div>
-                                    <div flex two>{{model.status}}</div>
                                     <div flex>${{model.price}}</div>
                                 </div>
                             </template>
