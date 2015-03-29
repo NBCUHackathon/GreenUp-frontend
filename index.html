@@ -68,11 +68,19 @@
         <div style="display: block"><!-- Drawer content... -->
             <div id="search" onclick="showPage(0)">Search</div>
             <div id="results" onclick="showPage(1)">Results</div>
-                <x-trigger><div id="login">Log In</div>
-                    <paper-dropdown class="open-below">
-                        <div>this is your log in field</div>
-                    </paper-dropdown>
-                </x-trigger>
+
+            <!--this one at the bottom -->
+            <x-trigger><div id="login" onclick="toggleLogin()">Login</div>
+              <div id="login-window">
+                <paper-input-decorator label="User Name" id="userName">
+                    <input id="userNameInput" is="core-input">
+                </paper-input-decorator>
+                <paper-input-decorator label="Password" id="password">
+                    <input id="passwordInput" is="core-input" type="password">
+                </paper-input-decorator>
+                <paper-button class="poly-btn" raised on-click='{{book}}'>LOGIN!</paper-button>
+            </div>
+          </x-trigger>
         </div>
     </core-header-panel>
     <core-header-panel main>
