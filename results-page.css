@@ -9,7 +9,23 @@
     padding: 25px 20px 0 20px;
 }
 
+.list-item div {
+    padding: 0 10px 0 10px;
+}
+
 .list-header {
+    box-sizing: border-box;
+    height: 32px;
+    cursor: default;
+    background-color: #868BC0;
+    color: white;
+    overflow: hidden;
+    border-bottom: 1px solid lightgrey;
+    padding: 10px 20px 0 20px;
+    font-size: 14px;
+}
+
+.list-type {
     box-sizing: border-box;
     height: 60px;
     cursor: default;
@@ -17,14 +33,11 @@
     color: white;
     overflow: hidden;
     border-bottom: 1px solid lightgrey;
-    padding: 25px 20px 0 20px;
+    padding: 20px 20px 0 20px;
+    font-size: 24px;
 }
 
-.list-item:hover{
-    background-color: lightgrey;
-}
-
-#list {
+#listAccepted, #listPending, #listDeclined {
     position: relative;
     height: 200px;
     margin:0px;
