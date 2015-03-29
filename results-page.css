@@ -120,3 +120,11 @@ a, a:hover {
 .check {
     margin-left: 12px;
 }
+
+.defaultDeclined, .defaultAccepted, .defaultPending {
+    height: 100%;
+    background-color: white;
+    padding: 25px;
+    font-weight: 600;
+    border: 1px solid lightgrey;
+}
