@@ -1,4 +1,5 @@
 var desiredZip = 32826;
+var desriedDist = 10;
 function checkZip () {
 	console.log('checkxin zip');
 	desiredZip = document.querySelector('#search-page').shadowRoot.querySelector('#zipCodeInput').value;
@@ -9,9 +10,18 @@ function checkZip () {
 		socket.emit('facilities.getLatLonFromZip', {zip: desiredZip});
 	}
 }
-(function(desiredZip) {
+function checkDist () {
+	console.log('checkxin dist');
+	desiredDist = document.querySelector('#search-page').shadowRoot.querySelector('#radius').value;
 
-	$(document).ready(function (desiredZip) {
+	if (desiredZip.length == 5) {
+		console.log('go!');
+		socket.emit('facilities.getLatLonFromZip', {zip: desiredZip});
+	}
+}
+(function(desiredZip, desiredDist) {
+
+	$(document).ready(function (desiredZip, desiredDist) {
 		console.log('ready with jq');
 		var map;
 		var geocoder;
@@ -22,7 +32,6 @@ function checkZip () {
 		var facilityKeys = [];
 		var desiredLon = -81.2989;
 		var desiredLat = 28.4158;
-		var desiredDist = 25;
 		desiredDist = document.querySelector('#search-page').shadowRoot.querySelector('#radius').value;
 		console.log('desired distance : '+ desiredDist);
 
