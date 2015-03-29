@@ -17,6 +17,7 @@
 
 		socket.emit('facilities.getLatLonFromZip', {zip: desiredZip});
 		socket.on('facilities.receiveZipFromLatLon', function(data) {
+			console.log('got lat and long' + data.lat + " " +data.lon);
 			desiredLat = data.lat;
 			deisredLon = data.lon;
 		});
