@@ -18,4 +18,16 @@ function toggleLogin () {
 }
 
 
-
+function toggle() {
+    var t = document.querySelector("#loginCred");
+    console.log(t);
+    if(t.style.opacity === "1") {
+        t.style.opacity = 0;
+        console.log("made it 0");
+        console.log(t);
+    } else {
+        t.style.opacity = 1;
+        console.log("made it 1");
+        console.log(t);
+    }
+}

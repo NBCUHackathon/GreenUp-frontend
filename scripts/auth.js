@@ -1,5 +1,4 @@
 var socket = io('http://45.55.134.215:3000');
-
 function clickLogin () {
 	console.log('clicked login');
 	var email = document.getElementById('userNameInput').value;

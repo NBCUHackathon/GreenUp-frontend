@@ -116,3 +116,7 @@ a, a:hover {
     padding: 50px;
     display: none;
 }
+
+.check {
+    margin-left: 12px;
+}

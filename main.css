@@ -51,6 +51,13 @@ body {
 
 .open-below {
     top: 0px;
+    background-color: white;
     color: black;
     width: 255px;
+    -webkit-transition: all 1s ease;
+    -moz-transition: all 1s ease;
+    -ms-transition: all 1s ease;
+    -o-transition: all 1s ease;
+    transition: all 1s ease;
+    opacity: 0;
 }
