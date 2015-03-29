@@ -10,6 +10,13 @@ body {
     padding: 20px;
 }
 
+.poly-btn {
+	margin-top: 25px;
+	width: 100%;
+	background-color: #03a9f4;
+	color: white;
+}
+
 #search {
     background-color: #4285F4;
 }
@@ -18,7 +25,21 @@ body {
     background-color: #3B78E7;
 }
 
-#search, #results {
+#login {
+	background: #356ccf;
+}
+
+#search, #results, #login {
+	cursor: pointer;
     padding: 20px;
     color: white;
 }
+
+#login-window {
+	color: #356ccf;
+	padding: 10px 20px;
+}
+#login-window .poly-btn {
+	background: #356ccf;
+}
+

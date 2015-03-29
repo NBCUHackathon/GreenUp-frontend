@@ -11,3 +11,10 @@ function showPage(index) {
     document.querySelector("core-pages").selected = index;
 }
 
+//isabella -- help! THis should toggle the visibility of the login window (id="login-window")
+function toggleLogin () {
+    console.log("Login Toggled");
+    // document.querySelector("core-pages").selected = index;
+}
+
+

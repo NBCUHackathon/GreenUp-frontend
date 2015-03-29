@@ -19,17 +19,34 @@ Polymer('results-page', {
         // Create data to populate paper-dialog
         var title, price, status, container;
         var att = document.createAttribute("class");
+        //fake the user now
+        //polymer is weird
+        //not sure if this should even be here? maybe in a different scope?
+        var user = {
+            isAuthenticated: true,
+            name: {
+                "first":"David",
+                "last": "Pate"
+            },
+            email: "david.pate@grimpy.com"
+        };
 
         title = "<div style='font-weight: 600;font-size: 24px;padding-bottom: 20px;'>" + data.name + "</div>";
         price = "<div style='float: left;'>$" + data.cost + "</div>";
         status = "<div style='float: right;'>" + data.status + "</div>";
         container = "<div style='width: 300px;'>" + price + status + "</div>";
 
-        if(data.status === 'Accepted') {
-            var button = "<paper-button raised style='margin-top: 25px; width: 100%; background-color: #03a9f4; color: white;' on-click='{{book}}'>BOOK NOW!</paper-button>";
+        if(user.isAuthenticated === true) {
+            if(data.status === 'Accepted') {
+                var button = "<paper-button raised style='margin-top: 25px; width: 100%; background-color: #03a9f4; color: white;' on-click='{{book}}'>BOOK NOW!</paper-button>";
+                dia.innerHTML = title + container + button;
+            } else {
+                dia.innerHTML = title + container;
+            }
+        }
+        else {
+            var button = "<paper-button raised style='margin-top: 25px; width: 100%; background-color: #5c6bc0; color: white;' on-click='toggleLogin();'>YOU NEED TO LOGIN!</paper-button>";
             dia.innerHTML = title + container + button;
-        } else {
-            dia.innerHTML = title + container;
         }
 
         dia.open();
