@@ -242,6 +242,15 @@ Polymer('results-page', {
     },
 
     book: function (event, detail, sender) {
+        var t = document.querySelector("paper-toast");
+
+        if(this.listToBook.length > 0) {
+            t.text = "Tee times booked!";
+            t.show();
+        } else {
+            t.text = "Choose at least one tee time."
+            t.show();
+        }
         console.dir("booking.. " + JSON.stringify(this.listToBook));
     },
 
