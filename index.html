@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>Golf</title>
+    <title>Mi-Tee</title>
 
     <!-- Core and paper elements -->
     <script
@@ -29,7 +29,18 @@
     <link rel="import"
           href="bower_components/paper-slider/paper-slider.html">
     <link rel="import"
-          href="bower_components/polymer-date-picker/polymer-date-picker.html">
+          href="bower_components/core-dropdown/core-dropdown.html">
+    <link rel="import"
+          href="bower_components/core-collapse/core-collapse.html">
+    <link rel="import"
+          href="bower_components/paper-item/paper-item.html">
+    <link rel="import"
+          href="bower_components/paper-shadow/paper-shadow.html">
+    <link rel="import"
+          href="bower_components/paper-dropdown/paper-dropdown.html">
+
+    <!-- External libraries -->
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 
     <!-- Custom elements -->
     <link rel="import"
@@ -38,15 +49,31 @@
           href="search-page.html">
     <link rel="stylesheet" type="text/css" href="main.css">
 
-<!-- Google Maps -->
-<script src="https://maps.googleapis.com/maps/api/js?v=3.exp"></script>
+    <!-- Google Maps -->
+    <script src="https://maps.googleapis.com/maps/api/js?v=3.exp"></script>
 
-<!-- Custom Scripts -->
-<!--<script src="frontend/scripts/myMap.js"></script>-->
-
+    <!-- Custom Scripts -->
+    <!--<script src="frontend/scripts/myMap.js"></script>-->
 
 </head>
 <body style="background-color: #f0f0f0; font-weight: 300;">
+
+<polymer-element name="x-trigger" relative on-tap="{{toggle}}" noink>
+    <template>
+        <shadow></shadow>
+        <content></content>
+    </template>
+    <script>
+        Polymer({
+            toggle: function () {
+                if (!this.dropdown) {
+                    this.dropdown = this.querySelector('paper-dropdown');
+                }
+                this.dropdown && this.dropdown.toggle();
+            }
+        });
+    </script>
+</polymer-element>
 
 
 <core-drawer-panel>
@@ -57,12 +84,17 @@
         <div style="display: block"><!-- Drawer content... -->
             <div id="search" onclick="showPage(0)">Search</div>
             <div id="results" onclick="showPage(1)">Results</div>
+                <x-trigger><div id="login">Log In</div>
+                    <paper-dropdown class="open-below">
+                        <div>this is your log in field</div>
+                    </paper-dropdown>
+                </x-trigger>
         </div>
     </core-header-panel>
     <core-header-panel main>
         <core-toolbar>
             <core-icon-button icon="menu" core-drawer-toggle></core-icon-button>
-            <div>Tee Time</div>
+            <div>Mi-Tee</div>
         </core-toolbar>
 
         <core-pages selected="0" transitions="hero-transition cross-fade">

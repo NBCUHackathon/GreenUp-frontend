@@ -10,7 +10,7 @@ body {
     padding: 20px;
 }
 
-#search {
+#search, #login {
     background-color: #4285F4;
 }
 
@@ -18,7 +18,12 @@ body {
     background-color: #3B78E7;
 }
 
-#search, #results {
+#search, #results, #login {
     padding: 20px;
     color: white;
+}
+
+.open-below {
+    top: 0px;
+    color: black;
 }

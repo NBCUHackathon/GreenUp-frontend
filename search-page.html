@@ -1,12 +1,15 @@
-<link rel="import" href="../bower_components/polymer/polymer.html">
-<link rel="import" href="../bower_components/core-list/core-list.html">
-<link rel="import" href="../bower_components/paper-shadow/paper-shadow.html">
-<link rel="import" href="../bower_components/paper-dialog/paper-dialog.html">
-<link rel="import" href="../bower_components/paper-button/paper-button.html">
-<link rel="import" href="../bower_components/paper-slider/paper-slider.html">
-<link rel="import" href="../bower_components/paper-input/paper-input-decorator.html">
-<link rel="import" href="../bower_components/polymer-date-picker/polymer-date-picker.html">
-<link rel="import" href="../bower_components/d-calendar/d-calendar.html">
+<link rel="import" href="bower_components/polymer/polymer.html">
+<link rel="import" href="bower_components/core-list/core-list.html">
+<link rel="import" href="bower_components/core-input/core-input.html">
+<link rel="import" href="bower_components/paper-shadow/paper-shadow.html">
+<link rel="import" href="bower_components/paper-dialog/paper-dialog.html">
+<link rel="import" href="bower_components/paper-button/paper-button.html">
+<link rel="import" href="bower_components/paper-slider/paper-slider.html">
+<link rel="import" href="bower_components/paper-input/paper-input-decorator.html">
+<link rel="import"
+      href="bower_components/d-calendar/d-calendar.html">   <!-- Don't get from bower update because of local CSS changes -->
+<script src="../moment/moment.js"></script>
+<link rel="import" href="bower_components/nemento-timepicker/nemento-timepicker.html">
 
 
 <polymer-element name="search-page" id="search-page">
@@ -33,22 +36,31 @@
                     </div>
                 </paper-shadow>
 
-                <paper-shadow class="search-page-paper-shadow">
+                <paper-shadow class="search-page-paper-shadow" style="margin-top: 30px;">
                     <div vertical layout>
-                        <template id="sandbox" is="auto-binding">
-                            <div>
-                                <d-calendar selectedDate="{{selectedDate}}" date="{{date}}" class="light-theme"
-                                            on-d-calendar-date-selected="{{dateSelected}}"></d-calendar>
-                                <d-calendar selectedDate="{{selectedDate}}"></d-calendar>
+                        <div class="questionTitle">When would you like to golf?</div>
+                        <div horizontal layout>
+                            <template id="sandbox" is="auto-binding">
+                                <div style="margin-left: -20px;">
+                                    <d-calendar selectedDate="{{selectedDate}}" date="{{date}}" class="light-theme"
+                                                on-d-calendar-date-selected="{{dateSelected}}"></d-calendar>
+                                </div>
+                            </template>
+
+                            <div style="margin: 50px 0 0 20px;">
+                                <div class="questionTitle">Start Time</div>
+                                <nemento-timepicker ampm="false" valign="bottom" step="10"
+                                                    id="startTime"></nemento-timepicker>
+                                <div class="questionTitle" style="margin-top: 30px;">End Time</div>
+                                <nemento-timepicker ampm="false" valign="bottom" step="10"
+                                                    id="endTime"></nemento-timepicker>
                             </div>
-                            <div id="dateDisplay">
-                                <input id="dateinput" placeholder="Selected Date" is="core-input"
-                                       committedValue="{{selectedDate}}"></input>
-                            </div>
-                        </template>
+                        </div>
 
                     </div>
                 </paper-shadow>
+
+                <paper-button raised affirm id="notify">Notify Me!</paper-button>
             </div>
         </section>
 
