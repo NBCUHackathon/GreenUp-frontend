@@ -25,6 +25,25 @@
     font-size: 14px;
 }
 
+.list-title {
+    margin-top: -5px;
+}
+
+@media screen and (min-width: 280px) and (max-width: 800px) {
+    .list-title {
+        margin-top: -15px;
+        font-size: 12px !important;
+    }
+    .list-title .bold {
+        font-weight: 400;
+    }
+    .list-content {
+        font-size: 12px !important;
+        margin-top: -10px;
+    }
+}
+
+
 .list-type {
     box-sizing: border-box;
     height: 60px;

@@ -50,7 +50,7 @@ function checkDist () {
 			console.log('initing');
 		  var mapOptions = {
             scrollwheel: false,
-		    zoom: 12,
+		    zoom: 10,
 		    center: new google.maps.LatLng(28.601648, -81.200306)
 		  };
 		  map = new google.maps.Map(document.querySelector('#search-page').shadowRoot.querySelector('#googleMap'), mapOptions);

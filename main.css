@@ -69,6 +69,14 @@ body {
 	background: #6C9A33;
 }
 
+#results-page {
+	background: red;
+}
+.list-title {
+	font-size: 20px;
+	margin-top: -20px;
+}
+
 .open-below {
     top: 0px;
     background-color: white;
