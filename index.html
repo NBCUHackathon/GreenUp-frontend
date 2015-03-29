@@ -47,7 +47,10 @@
           href="results-page.html">
     <link rel="import"
           href="search-page.html">
-    <link rel="stylesheet" type="text/css" href="main.css">
+    <link rel="import"
+          href="x-trigger.html">
+    <link rel="stylesheet" type="text/css"
+          href="main.css">
 
     <!-- Google Maps -->
     <script src="https://maps.googleapis.com/maps/api/js?v=3.exp"></script>
@@ -57,25 +60,6 @@
 
 </head>
 <body style="background-color: #f0f0f0; font-weight: 300;">
-
-<polymer-element name="x-trigger" relative on-tap="{{toggle}}" noink>
-    <template>
-        <shadow></shadow>
-        <content></content>
-    </template>
-    <script>
-        Polymer({
-            toggle: function () {
-                if (!this.dropdown) {
-                    this.dropdown = this.querySelector('paper-dropdown');
-                }
-                this.dropdown && this.dropdown.toggle();
-            }
-        });
-    </script>
-</polymer-element>
-
-
 <core-drawer-panel>
     <core-header-panel drawer>
         <core-toolbar>
