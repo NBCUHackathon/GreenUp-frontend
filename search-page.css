@@ -35,3 +35,22 @@ section {
     width: 100%;
     background-color: #03a9f4;
 }
+
+.disabled {
+    background: #eaeaea !important;
+    color: #a8a8a8 !important;
+    cursor: auto;
+    pointer-events: none;
+}
+
+paper-slider::shadow #sliderBar::shadow #activeProgress {
+    background-color: #6C9A33;
+}
+
+paper-slider::shadow #sliderKnobInner {
+    background-color: #6C9A33;
+}
+
+paper-slider::shadow #sliderKnobInner::before {
+    background-color: #6C9A33;
+}

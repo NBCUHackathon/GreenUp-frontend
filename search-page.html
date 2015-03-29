@@ -23,13 +23,13 @@
                         <div>
                             <div class="questionTitle">Where would you like to golf?</div>
                             <paper-input-decorator label="Zip code" id="zipCode">
-                                <input id="zipCodeInput" is="core-input" maxlength="5">
+                                <input id="zipCodeInput" is="core-input" maxlength="5" required>
                             </paper-input-decorator>
                         </div>
 
                         <div style="margin-top: 25px;">
                             <div class="questionTitle">How many miles are you willing to travel?</div>
-                            <paper-slider min="10" max="200" value="110" pin
+                            <paper-slider min="10" max="200" value="110" pin id="radius"
                                           style=" width: 330px; margin-top: 25px;"></paper-slider>
                         </div>
                     </div>
@@ -65,7 +65,7 @@
                     </div>
                 </paper-shadow>
 
-                <paper-button raised affirm id="notify">Notify Me!</paper-button>
+                <paper-button raised affirm id="notify" class="disabled" disabled>Notify Me!</paper-button>
             </div>
         </section>
 
