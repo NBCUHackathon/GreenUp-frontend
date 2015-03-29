@@ -64,20 +64,20 @@ Polymer('results-page', {
 
     domReady: function () {
        this.socket.on("send.reservations.golfer.accepted", function(data) {
-            accepted = data;
+            if(data.length > 0) accepted = data;
             console.log("accepted " + JSON.stringify(accepted));
            thisVar.updateLists();
         });
 
         this.socket.on("send.reservations.golfer.pending", function(data) {
-            pending = data;
+            if(data.length > 0) pending = data;
             console.log("pending" + JSON.stringify(pending));
             thisVar.updateLists();
 
         });
 
         this.socket.on("send.reservations.golfer.declined", function(data) {
-            declined = data;
+            if(data.length > 0) declined = data;
             console.log("declined");
             thisVar.updateLists();
         });
