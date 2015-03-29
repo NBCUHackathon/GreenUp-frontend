@@ -3,6 +3,20 @@ var accepted = [];
 var pending = [];
 var declined = [];
 
+//socket.on("send.reservations.golfer.accepted", function(data) {
+//    accepted = data;
+//    console.log("accepted");
+//});
+//
+//socket.on("send.reservations.golfer.pending", function(data) {
+//    pending = data;
+//    console.log("pending");
+//});
+//
+//socket.on("send.reservations.golfer.declined", function(data) {
+//    declined = data;
+//    console.log("declined");
+//});
 /**
  * Created by isabella on 3/28/15.
  */
@@ -10,29 +24,48 @@ Polymer('results-page', {
 
     listToBook: [],
 
-    socket: socket,
+    socket: io('http://45.55.134.215:9999'),
 
     ready: function() {
-        this.socket = socket;
-        console.dir("socket: " + socket + "\tthis.socket: " + this.socket);
+        //this.socket = socket;
+        //console.log(this.socket);
 
-        this.socket.on("send.reservations.golfer.accepted", function(data) {
+        this.socket.on("accepted", function(data) {
             accepted = data;
             console.log("accepted");
+            this.updateLists();
         });
 
         this.socket.on("send.reservations.golfer.pending", function(data) {
             pending = data;
             console.log("pending");
+            this.updateLists();
         });
 
         this.socket.on("send.reservations.golfer.declined", function(data) {
             declined = data;
             console.log("declined");
+            this.updateLists();
         });
+
+
     },
 
     domReady: function () {
+        //this.socket.on("send.reservations.golfer.accepted", function(data) {
+        //    accepted = data;
+        //    console.log("accepted");
+        //});
+        //
+        //this.socket.on("send.reservations.golfer.pending", function(data) {
+        //    pending = data;
+        //    console.log("pending");
+        //});
+        //
+        //this.socket.on("send.reservations.golfer.declined", function(data) {
+        //    declined = data;
+        //    console.log("declined");
+        //});
         //this.$.listAccepted.data = [{
         //    "name": "3 Golf 5 You",
         //    "cost": "87.50",
@@ -74,7 +107,7 @@ Polymer('results-page', {
         this.$.listDeclined.data = declined;
     },
 
-    updateList: function() {
+    updateLists: function() {
         this.$.listAccepted.data = accepted;
         this.$.listPending.data = pending;
         this.$.listDeclined.data = declined;
