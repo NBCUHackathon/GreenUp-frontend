@@ -1,5 +1,6 @@
 (function() {
 	$(document).ready(function () {
+		console.log('ready with jq');
 		var map;
 		// Keep a single instance of infowindow so there is only one popup balloon in map instance
 		// var infowindow = new google.maps.InfoWindow();
@@ -11,11 +12,13 @@
 		function initMap() {
 			console.log('initing');
 		  var mapOptions = {
+            scrollwheel: false,
 		    zoom: 14,
 		    center: new google.maps.LatLng(28.601648, -81.200306)
 		  };
-		  map = new google.maps.Map(document.getElementById('map-canvas'),
-		      mapOptions);
+		  map = new google.maps.Map(document.querySelector('#search-page').shadowRoot.querySelector('#googleMap'), mapOptions);
+          console.log(map);
+		  console.log("done");
 		}
 
 		// Initially initialize the map with all the points

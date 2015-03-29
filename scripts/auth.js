@@ -1,7 +1,6 @@
 var socket = io('http://45.55.134.215:9999');
 
 function clickLogin () {
-	console.log('clicked login');
 	var email = document.getElementById('userNameInput').value;
 	var pass = document.getElementById('passwordInput').value;
 	authenticateUser(email, pass);
@@ -12,7 +11,6 @@ function authenticateUser(email, pass) {
 
  	//request for customer token
 	socket.emit('auth.user', {userEmail: email, password: pass});
-	socket.emit('test', {stuff: "oh.. hi"});
 }
 
 socket.on('auth.tokenReceived', function(token) {
