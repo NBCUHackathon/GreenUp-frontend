@@ -3,7 +3,6 @@ var desriedDist = 10;
 function checkZip () {
 	console.log('checkxin zip');
 	desiredZip = document.querySelector('#search-page').shadowRoot.querySelector('#zipCodeInput').value;
-	console.log('checking ' + desiredZip.length);
 
 	if (desiredZip.length == 5) {
 		console.log('go!');
@@ -11,7 +10,6 @@ function checkZip () {
 	}
 }
 function checkDist () {
-	console.log('checkxin dist');
 	desiredDist = document.querySelector('#search-page').shadowRoot.querySelector('#radius').value;
 
 	if (desiredZip.length == 5) {
@@ -23,7 +21,6 @@ function checkDist () {
 (function(desiredZip, desiredDist) {
 
 	$(document).ready(function (desiredZip, desiredDist) {
-		console.log('ready with jq');
 		var map;
 		var geocoder;
 		// Keep a single instance of infowindow so there is only one popup balloon in map instance
@@ -34,12 +31,12 @@ function checkDist () {
 		var desiredLon = -81.2989;
 		var desiredLat = 28.4158;
 		desiredDist = document.querySelector('#search-page').shadowRoot.querySelector('#radius').value;
-		console.log('desired distance : '+ desiredDist);
+		// console.log('desired distance : '+ desiredDist);
 
 
 		socket.emit('facilities.getLatLonFromZip', {zip: desiredZip});
 		socket.on('facilities.receiveZipFromLatLon', function(data) {
-			console.log('got lat and long ' + data.lat + " " + data.lon);
+			// console.log('got lat and long ' + data.lat + " " + data.lon);
 			desiredLat = data.lat;
 			deisredLon = data.lon;
 
@@ -57,28 +54,12 @@ function checkDist () {
 		    center: new google.maps.LatLng(28.601648, -81.200306)
 		  };
 		  map = new google.maps.Map(document.querySelector('#search-page').shadowRoot.querySelector('#googleMap'), mapOptions);
-          console.log(map);
-		  console.log("done");
+
 		}
 
 		// Initially initialize the map with all the points
 		function initialize() {
 		    initMap();
-		    // getFacilityByCity("Orlando", 17652, 100, 0);
-
-		    // socket.emit('facilities.getFacilityByLatLonAndRange', {lat: desiredLat, lon: desiredLon, range: 0});
-
-			//test goToCourseFunctionality
-			// setTimeout(function() {
-			// 	goToCourse(1743);
-			// 	console.log('waited');
-			// }, 3000);
-
-			// //test goToCourseFunctionality
-			// setTimeout(function() {
-			// 	goToZipCenter(32779);
-			// 	console.log('waited');
-			// }, 5000);
 		}
 
 		// converts get facilites object into markers for use by google maps
@@ -87,18 +68,16 @@ function checkDist () {
 		function jsonFacilitiesToMarkers(facilities) {
 			console.log("creating markers");
 			console.log(Object.keys(facilities).length);
-
+			var markers = [];
 		    for (key in facilities) {
 		    	console.log(facilities[key].Address.PostalCode);
-		        if (facilities[key].Address.PostalCode == desiredZip) {
-			        markers.push(new google.maps.Marker({
-			            position: new google.maps.LatLng(facilities[key].Latitude, facilities[key].Longitude),
-			            map: map,
-			            animation:google.maps.Animation.DROP,
-			            title: key,
-			            id: facilities[key].ID
-			        }));
-			    }
+		        markers.push(new google.maps.Marker({
+		            position: new google.maps.LatLng(facilities[key].Latitude, facilities[key].Longitude),
+		            map: map,
+		            animation:google.maps.Animation.DROP,
+		            title: key,
+		            id: facilities[key].ID
+		        }));
 		    }
 		    return markers;
 		}
@@ -142,7 +121,6 @@ function checkDist () {
 
 		function checkZip () {
 			desiredZip = document.querySelector('#search-page').shadowRoot.querySelector('#zipCodeInput').value;
-			console.log('checking ' + desiredZip.length);
 			if (desiredZip.length == 5) { 
 				socket.emit('facilities.getLatLonFromZip', {zip: desiredZip});
 			}
@@ -152,8 +130,6 @@ function checkDist () {
 
 		//recieve the facilities and load the markers
 		socket.on('facilities.receiveFacilitiesByLatLonRange', function(data) {
-			console.log(data);
-			console.log('recd data');
 			goToZipCenter();
 			loadMarkers(jsonFacilitiesToMarkers(data.facilities));
 		});
