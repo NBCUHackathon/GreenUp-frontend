@@ -20,13 +20,14 @@ Polymer('search-page', {
 
         document.querySelector('search-page').shadowRoot.querySelector("#notify").addEventListener('click', function() {
             var zip = document.querySelector("search-page").shadowRoot.querySelector("#zipCodeInput").value;
-            var radius = document.querySelector("search-page").shadowRoot.querySelector("#radius").immediateValue;
+            var radius = document.querySelector("search-page").shadowRoot.querySelector("#maxPrice").immediateValue;
+            var maxPrice = document.querySelector("search-page").shadowRoot.querySelector("#radius").immediateValue;
             var date = document.querySelector("search-page").shadowRoot.querySelector("d-calendar").selectedDate;
             var s = startTime;
             var e = endTime;
             console.log(s + "," + e);
 
-            var j = {"zip": zip, "radius": radius, "start": s, "end": e};
+            var j = {"zip": zip, "radius": radius, "start": s, "end": e, "maxPrice": maxPrice};
 
             socket.emit("reservation.sent", j);
             console.log("sending: " + JSON.stringify(j));
