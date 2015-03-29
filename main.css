@@ -3,7 +3,7 @@ body {
 }
 
 .drawer {
-    background-color: #3f3f3f;
+    background-color: rgb(215, 212, 212);
 }
 
 #navheader {
@@ -23,16 +23,25 @@ body {
 }
 
 #search, #login {
-    background-color: #4285F4;
+    background-color: #B6AD93;
+    -webkit-transition: all 1s ease;
+    -moz-transition: all 1s ease;
+    -ms-transition: all 1s ease;
+    -o-transition: all 1s ease;
+    transition: all 1s ease;
 }
 
 #results {
-    background-color: #3B78E7;
+    background-color: #CBC2A7;
+    -webkit-transition: all 1s ease;
+    -moz-transition: all 1s ease;
+    -ms-transition: all 1s ease;
+    -o-transition: all 1s ease;
+    transition: all 1s ease;
 }
 
-
-#login {
-	background: #356ccf;
+#search:hover, #login:hover, #results:hover {
+    background-color: #d9cfb3;
 }
 
 #search, #results, #login {
@@ -46,7 +55,7 @@ body {
 	padding: 10px 20px;
 }
 #login-window .poly-btn {
-	background: #356ccf;
+	background: #6C9A33;
 }
 
 .open-below {
