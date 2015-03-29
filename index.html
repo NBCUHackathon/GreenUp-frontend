@@ -41,6 +41,7 @@
 
     <!-- External libraries -->
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    <script src="scripts/socket.io.js"></script>
 
     <!-- Custom elements -->
     <link rel="import"
@@ -56,7 +57,8 @@
     <script src="https://maps.googleapis.com/maps/api/js?v=3.exp"></script>
 
     <!-- Custom Scripts -->
-    <!--<script src="frontend/scripts/myMap.js"></script>-->
+    <script src="scripts/myMap.js"></script>
+    <script src="scripts/auth.js"></script>
 
 </head>
 <body style="background-color: #f0f0f0; font-weight: 300;">
@@ -80,10 +82,11 @@
                         <paper-input-decorator label="Password" id="password">
                             <input id="passwordInput" is="core-input" type="password">
                         </paper-input-decorator>
-                        <paper-button class="poly-btn" raised on-click='{{book}}'>LOGIN!</paper-button>
+                        <paper-button class="poly-btn" raised onclick="clickLogin()">LOGIN!</paper-button>
                     </div>
                 </paper-dropdown>
             </x-trigger>
+
         </div>
     </core-header-panel>
     <core-header-panel main>
@@ -107,6 +110,6 @@
     </core-header-panel>
 </core-drawer-panel>
 
-<script src="main.js"></script>
+<script src="scripts/main.js"></script>
 </body>
 </html>
