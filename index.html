@@ -63,7 +63,7 @@
 </head>
 <body style="background-color: #f0f0f0; font-weight: 300;">
 <core-drawer-panel>
-    <core-header-panel drawer>
+    <core-header-panel drawer class="drawer">
         <core-toolbar>
             <div>Menu</div>
         </core-toolbar>
@@ -72,17 +72,21 @@
             <div id="results" onclick="showPage(1)">Results</div>
 
             <!--this one at the bottom -->
-            <x-trigger><div id="login" onclick="toggleLogin()">Login</div>
-              <div id="login-window">
-                <paper-input-decorator label="User Name" id="userName">
-                    <input id="userNameInput" is="core-input">
-                </paper-input-decorator>
-                <paper-input-decorator label="Password" id="password">
-                    <input id="passwordInput" is="core-input" type="password">
-                </paper-input-decorator>
-                <paper-button class="poly-btn" raised onclick="clickLogin()">LOGIN!</paper-button>
-            </div>
-          </x-trigger>
+            <x-trigger>
+                <div id="login">Login</div>
+                <paper-dropdown class="open-below">
+                    <div id="login-window">
+                        <paper-input-decorator label="User Name" id="userName">
+                            <input id="userNameInput" is="core-input">
+                        </paper-input-decorator>
+                        <paper-input-decorator label="Password" id="password">
+                            <input id="passwordInput" is="core-input" type="password">
+                        </paper-input-decorator>
+                        <paper-button class="poly-btn" raised onclick="clickLogin()">LOGIN!</paper-button>
+                    </div>
+                </paper-dropdown>
+            </x-trigger>
+
         </div>
     </core-header-panel>
     <core-header-panel main>

@@ -1,0 +1,311 @@
+<script src="../moment/moment.js"></script>
+<link rel="import" href="../polymer/polymer.html">
+<link rel="import" href="../core-dropdown/core-dropdown.html">
+<link rel="import" href="../paper-input/paper-input.html">
+<link rel="import" href="../paper-shadow/paper-shadow.html">
+<link rel="import" href="../nemento-display/nemento-display.html">
+
+<!--
+timepicker as polymer web-component. now it depends from moment library,
+but it will be removed soon.
+
+##### Example
+
+    <nemento-timepicker></nemento-timepicker>
+
+    <script>
+    document
+      .querySelector('nemento-timepicker')
+      .addEventListner('changed', function(e, d) {
+        console.log(d.time);
+      });
+    </script>
+
+@group Nemento Elements
+@element nemento-timepicker
+@homepage http://nemento.github.io/nemento-timepicker
+-->
+<polymer-element name="nemento-timepicker" layout horizontal center>
+
+<template>
+  <style>
+    :host {
+      font-family: inherit;
+      display: block;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      -webkit-user-select: none;
+      user-select: none;
+      position: relative;
+      font-size: 1em;
+    }
+
+    :host core-dropdown {
+      padding: 8px;
+      box-sizing: border-box;
+      border-radius: 2px;
+      width: 8em;
+      height: 6em;
+    }
+
+    :host core-dropdown.without-ampm {
+      padding-left: 0.5em;
+      padding-right: 0.5em;
+    }
+
+    :host core-dropdown nemento-display {
+      height: 100%;
+    }
+
+    :host core-dropdown #ampm {
+      color: #888;
+    }
+
+    :host core-icon {
+      color: #aaa;
+      margin-right: 0.5em;
+      margin-left: 0.5em;
+    }
+
+    :host paper-input {
+      width: 5em;
+    }
+  </style>
+
+  <!--<template if="{{icon}}">-->
+
+  <!--</template>-->
+  <!--<paper-input id="control" on-focus="{{open}}"></paper-input>-->
+  <!--<core-dropdown id="picker" relatedTarget="{{$.control}}" opened="{{opened}}" halign="right"-->
+  <!--valign="{{valign}}" layout horizontal center>-->
+
+  <!--</core-dropdown>-->
+  <!--<paper-shadow target="{{$.picker}}"></paper-shadow>-->
+
+  <div id="control" layout horizontal center on-tap="{{toggle}}">
+    <core-icon icon="{{icon}}" on-tap="{{open}}"></core-icon>
+    <paper-input id="control" on-focus="{{open}}"></paper-input>
+  </div>
+
+  <core-dropdown id="dropdown" relatedTarget="{{$.control}}" opened="{{opened}}" halign="{{halign}}" valign="{{valign}}" layout horizontal center class="{{ {'without-ampm':!ampm} | tokenList }}">
+    <nemento-display flex id="hours" selected="{{currentHour}}"></nemento-display>
+    <nemento-display flex id="minutes" on-loop-next="{{nextHour}}" on-loop-prev="{{prevHour}}" selected="{{currentMinute}}"></nemento-display>
+    <template if="{{ampm}}">
+      <nemento-display flex id="ampm" selected="{{currentAmPm}}"></nemento-display>
+    </template>
+  </core-dropdown>
+
+  <paper-shadow z="1" target="{{$.dropdown}}"></paper-shadow>
+</template>
+
+<script>
+
+(function () {
+
+  Polymer({
+    publish: {
+      /**
+       * Fired when a time changed
+       *
+       * @event changed
+       * @param {Object} detail
+       *   @param {Object} detail.time picked time
+       */
+
+      /**
+       * Date Object which store picked time
+       *
+       * @attribute time
+       * @type Date
+       * @default Date.now
+       */
+      time: { value: null, reflect: true },
+      /**
+       * Step for minutes
+       *
+       * @attribute step
+       * @type number
+       * @default 1
+       */
+      step: { value: 1, reflect: true },
+      /**
+       * Switch between 12h / 24h
+       *
+       * @attribute ampm
+       * @type boolean
+       * @default true
+       */
+      ampm: { value: false, reflect: true },
+      /**
+       * Name of polymer icon which use with input
+       *
+       * @attribute icon
+       * @type string
+       * @default query-builder
+       */
+      icon: { value: 'query-builder', reflect: true },
+      /**
+       * Vertical align of component: top, bottom, auto
+       *
+       * @attribute valign
+       * @type string
+       * @default auto
+       */
+      valign: { value: 'auto', reflect: true }
+    },
+    currentHour: 0,
+    currentMinute: 0,
+    currentAmPm: 0,
+    opened: false,
+
+    observe: {
+      'currentHour': 'update',
+      'currentMinute': 'update',
+      'currentAmPm': 'update'
+    },
+
+    toggle: function() {
+      this.opened = !this.opened;
+    },
+
+    openedChanged: function () {
+      if (!this.opened) {
+        this.commit();
+      }
+    },
+
+    ready: function () {
+      if (!this.currentAmPm) {
+        this.currentAmPm = 0;
+      }
+      this.prepareHours();
+      this.prepareMinutes();
+      this.prepareAmPm();
+    },
+
+    update: function () {
+      this.$.control.value = [
+        this.$.hours.getValue(),
+        this.$.minutes.getValue()
+      ].join(':') + (this.ampm ? ' ' + this.$.ampm.getValue() : '');
+    },
+
+
+    commit: function () {
+      var time = moment(this.time||undefined);
+      time.hours(this.$.hours.getValue());
+      time.minutes(this.$.minutes.getValue());
+      this.time = time.toDate();
+      this.fire('changed', { time: this.time });
+    },
+
+    ampmChanged: function () {
+      this.prepareHours();
+      if (this.ampm && this.currentAmPm == 'PM') {
+        this.currentHour = this.currentHour + 12;
+      }
+      if (!this.ampm && this.currentHour > 12) {
+        this.currentHour = this.currentHour - 12;
+        this.currentAmPm = 'PM';
+      }
+    },
+
+    stepChanged: function () {
+      this.prepareMinutes();
+    },
+
+    timeChanged: function() {
+      if(!this.time) return;
+      var time = moment(this.time),
+        tmp;
+      this.currentHour = time.format(this.ampm?'h':'H');
+
+      tmp = Math.floor(parseInt(time.format('m')) / this.step) * this.step;
+      this.currentMinute = tmp ? this.$.minutes.data.indexOf(tmp) : 0;
+      this.currentAmPm = time.format('A') == 'AM' ? 0 : 1;
+    },
+
+    prepareHours: function () {
+      var hours12 = [12,1,2,3,4,5,6,7,8,9,10,11];
+      var hours24 = [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23];
+      this.$.hours.data = this.ampm ? hours12 : hours24;
+    },
+
+    prepareMinutes: function () {
+      var min = 0,
+        max = 59,
+        minutes = [],
+        curr;
+
+      for (curr = min; curr <= max; curr += this.step) {
+        minutes.push(this.timeValue(curr));
+      }
+
+      this.$.minutes.data = minutes;
+    },
+
+    prepareAmPm: function() {
+      if(!this.ampm) return;
+      this.$.ampm.data = ['AM', 'PM'];
+    },
+
+
+    changeAmPm: function () {
+      this.currentAmPm = this.currentAmPm == 'AM' ? 'PM' : 'AM';
+    },
+
+    nextHour: function () {
+      if (this.currentHour < (this.$.hours.data.length - 1)) {
+        this.currentHour++;
+      }
+      else {
+        this.currentHour = 0;
+        if (this.ampm) {
+          this.changeAmPm();
+        }
+      }
+    },
+
+    prevHour: function () {
+      if (this.currentHour > 0) {
+        this.currentHour--;
+      }
+      else {
+        this.currentHour = this.$.hours.data.length - 1;
+        if (this.ampm) {
+          this.changeAmPm();
+        }
+      }
+    },
+
+    nextMinute: function () {
+      if (this.currentMinute < (this.$.minutes.data.length - 1)) {
+        this.currentMinute++;
+      }
+      else {
+        this.currentMinute = 0;
+        this.nextHour();
+      }
+    },
+
+    prevMinute: function () {
+      if (this.currentMinute > 0) {
+        this.currentMinute--;
+      }
+      else {
+        this.currentMinute = this.$.minutes.data.length - 1;
+        this.prevHour();
+      }
+    },
+
+    timeValue: function (val) {
+      if (parseInt(val) < 10) {
+        val = '0' + val;
+      }
+      return val;
+    }
+  });
+})();
+</script>
+
+</polymer-element>

@@ -1,0 +1,238 @@
+<link rel="import" href="../polymer/polymer.html">
+<link rel="import" href="../core-a11y-keys/core-a11y-keys.html">
+<link rel="import" href="../paper-icon-button/paper-icon-button.html">
+<link rel="import" href="../core-icons/core-icons.html">
+<link rel="import" href="../core-animated-pages/core-animated-pages.html">
+<link rel="import" href="../core-animated-pages/transitions/slide-from-bottom.html">
+<link rel="import" href="../core-animated-pages/transitions/slide-from-right.html">
+
+<!--
+nemento-display allow to display one item from data set
+and easy switch to next / prev
+##### Example
+
+    <nemento-display></nemento-display>
+
+    <script>
+      var data = [
+        { label: 'Item 1', value: 1 },
+        { label: 'Item 2', value: 2 },
+        { label: 'Item 3', value: 3 },
+        { label: 'Item 4', value: 4 },
+        { label: 'Item 5', value: 5 }
+      ];
+
+      window.addEventListener('polymer-ready', function() {
+        document.querySelector('nemento-display').data = data;
+      });
+    </script>
+
+@group Nemento Elements
+@element nemento-display
+@homepage http://nemento.github.io/nemento-display
+-->
+<polymer-element name="nemento-display" touch-action="none" attributes="">
+
+<template>
+  <style>
+    :host {
+      display: block;
+      position: relative;
+      -webkit-touch-callout: none;
+      -webkit-user-select: none;
+      -khtml-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+    }
+
+    :focus {
+      outline: none;
+    }
+
+    :host .view {
+      overflow: hidden;
+      margin: 0.12em 0.12em;
+    }
+
+    :host .view .item {
+      font-size: 1.15em;
+    }
+
+    :host paper-icon-button.arrow {
+      display: block;
+      text-align: center;
+      padding: 0.2em;
+      opacity: 0.6;
+    }
+  </style>
+
+  <template if="{{direction==='vertical'}}">
+    <section layout vertical fit tabindex="0">
+      <template if="{{buttons}}">
+        <paper-icon-button class="arrow" on-tap="{{next}}" fill icon="expand-less"></paper-icon-button>
+      </template>
+      <core-animated-pages on-trackEnd="{{ trackEnd }}"
+                           class="view" flex on-core-animated-pages-transition-end="{{onTransitionEnd}}" id="list"
+                           selected="{{selected}}" transitions="slide-from-bottom">
+        <template repeat="{{row, index in data}}">
+          <div layout horizontal center-center class="item" name="{{index}}">
+            <div>{{row}}</div>
+          </div>
+        </template>
+      </core-animated-pages>
+      <template if="{{buttons}}">
+        <paper-icon-button class="arrow" on-tap="{{prev}}" fill icon="expand-more"></paper-icon-button>
+      </template>
+    </section>
+
+  </template>
+
+  <template if="{{direction==='horizontal'}}">
+    <section layout horizontal fit tabindex="0">
+      <template if="{{buttons}}">
+        <paper-icon-button on-tap="{{next}}" self-center fill icon="chevron-left"></paper-icon-button>
+      </template>
+      <core-animated-pages on-trackEnd="{{ trackEnd }}"
+                           class="view" flex on-core-animated-pages-transition-end="{{onTransitionEnd}}" id="list"
+                           selected="{{selected}}" transitions="slide-from-right">
+        <template repeat="{{row, index in data}}">
+          <div layout horizontal center-center class="item" name="{{index}}">
+            <div>{{row}}</div>
+          </div>
+        </template>
+      </core-animated-pages>
+      <template if="{{buttons}}">
+        <paper-icon-button on-tap="{{prev}}" self-center fill icon="chevron-right"></paper-icon-button>
+      </template>
+    </section>
+  </template>
+
+  <core-a11y-keys target="{{}}" keys="up down left right" on-keys-pressed="{{keyHandler}}"></core-a11y-keys>
+</template>
+
+<script>
+  Polymer({
+
+    publish: {
+      /**
+       * index of selected item
+       *
+       * @attribute selected
+       * @type number
+       * @default ''
+       */
+      selected: {value: 0, reflect: true},
+      /**
+       * enable / disable loop
+       *
+       * for enable: EL_1 -> EL_2 -> ... -> EL_last -> EL_1 -> EL_2 -> ...
+       *
+       * for disable: EL_1 -> EL_2 -> ... -> EL_last
+       *
+       * @attribute loop
+       * @type boolean
+       * @default true
+       */
+      loop: {value: true, reflect: true},
+      /**
+       * show / hide buttons to switch
+       *
+       * it's useful for mobile devices where we can turnoff buttons and use swipes
+       *
+       * @attribute buttons
+       * @type boolean
+       * @default true
+       */
+      buttons: {value: null, reflect: true},
+
+      direction: {value: 'vertical', reflect: true}
+    },
+
+    /**
+     * array with all items
+     *
+     * @property data
+     * @type array
+     * @default []
+     */
+    data: null,
+    anim: false,
+
+    ready: function () {
+      this.buttons = this.buttons != false;
+      console.log(this.direction);
+    },
+
+    onTransitionEnd: function () {
+      this.anim = false;
+    },
+
+    keyHandler: function (evt, detail) {
+      if (this.anim) return;
+      this.anim = true;
+
+      if (detail.key === 'left') {
+        this.next();
+      }
+
+      if (detail.key === 'right') {
+        this.next();
+      }
+
+      if (detail.key === 'down') {
+        this.next();
+      }
+      else if (detail.key === 'up') {
+        this.prev();
+      }
+    },
+
+    next: function () {
+      if (this.selected < (this.data.length - 1)) {
+        this.selected++;
+      }
+      else if (this.loop) {
+        this.fire('loop-next');
+        this.selected = 0;
+      }
+    },
+
+    prev: function () {
+      if (this.selected > 0) {
+        this.selected--;
+      }
+      else if (this.loop) {
+        this.fire('loop-prev');
+        this.selected = this.data.length - 1;
+      }
+    },
+
+    getValue: function () {
+      return this.data[this.selected];
+    },
+
+    trackEnd: function (e) {
+      if(this.direction === 'vertical') {
+        if(Math.abs(e.dy) < 20) return;
+        if (e.dy < 0) {
+          this.next();
+        }
+        else if (e.dy > 0) {
+          this.prev();
+        }
+      }
+      else if(this.direction === 'horizontal') {
+        if(Math.abs(e.dx) < 20) return;
+        if (e.dx < 0) {
+          this.next();
+        }
+        else if (e.dx > 0) {
+          this.prev();
+        }
+      }
+    }
+  });
+
+</script>
+</polymer-element>

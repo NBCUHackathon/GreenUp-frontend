@@ -1,0 +1,72 @@
+<!doctype html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+  <title>nemento-timepicker demo</title>
+
+
+  <script src="../moment/moment.js"></script>
+  <script src="../platform/platform.js"></script>
+  <link rel="import" href="nemento-timepicker.html">
+  <style>
+    body {
+      font-family: Helvetica Neue, Helvetica, Arial;
+    }
+    section {
+      margin-bottom: 40px;
+    }
+  </style>
+</head>
+<body unresolved layout vertical>
+
+<section layout horizontal center>
+  <div flex>
+    <nemento-timepicker id="pick-1"></nemento-timepicker>
+  </div>
+  <div flex two>
+    default
+  </div>
+</section>
+
+<section layout horizontal center>
+  <div flex>
+    <nemento-timepicker step="15" id="pick-2"></nemento-timepicker>
+  </div>
+  <div flex two>
+    with 15 minutes step
+  </div>
+</section>
+
+<section layout horizontal center>
+  <div flex>
+    <nemento-timepicker ampm="false" valign="bottom" step="10" id="pick-3"></nemento-timepicker>
+  </div>
+  <div flex two>
+    with 10 minutes step & 24h
+  </div>
+</section>
+
+<script>
+  var el1 = document.querySelector('nemento-timepicker#pick-1');
+  var el2 = document.querySelector('nemento-timepicker#pick-2');
+  var el3 = document.querySelector('nemento-timepicker#pick-3');
+
+  var d = moment().hour(0), b = 0;
+
+
+  window.addEventListener('polymer-ready', function() {
+    var d = moment().hour(13);
+    el1.time = d.toDate();
+    el2.time = d.toDate();
+    el3.time = d.toDate();
+
+    el1.addEventListener('changed', function(d) {
+    });
+    el2.addEventListener('changed', function(d) {
+    });
+    el3.addEventListener('changed', function(d) {
+    });
+  });
+</script>
+</body>
+</html>

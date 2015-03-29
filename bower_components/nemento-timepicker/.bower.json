@@ -1,0 +1,47 @@
+{
+  "name": "nemento-timepicker",
+  "version": "0.0.2",
+  "private": true,
+  "authors": [
+    "Maciej Chmielarski <hello@evenemento.co>"
+  ],
+  "description": "",
+  "keywords": [
+    "nemento",
+    "time",
+    "timepicker",
+    "polymer",
+    "web-components"
+  ],
+  "ignore": [
+    ".jshintrc",
+    ".bowerrc",
+    "test",
+    ".gitignore",
+    "tests"
+  ],
+  "license": "MIT",
+  "main": "nemento-timepicker.html",
+  "dependencies": {
+    "moment": "moment#2.8.3",
+    "polymer": "Polymer/polymer",
+    "paper-input": "Polymer/paper-input",
+    "paper-shadow": "Polymer/paper-shadow",
+    "core-dropdown": "Polymer/core-dropdown",
+    "nemento-display": "nemento/nemento-display#0.0.1"
+  },
+  "devDependencies": {
+    "polymer-test-tools": "Polymer/polymer-test-tools"
+  },
+  "homepage": "https://github.com/nemento/nemento-timepicker",
+  "_release": "0.0.2",
+  "_resolution": {
+    "type": "version",
+    "tag": "v0.0.2",
+    "commit": "70924cd83deda552d20ca5618c388b4c71f4531b"
+  },
+  "_source": "https://github.com/nemento/nemento-timepicker.git",
+  "_target": "~0.0.2",
+  "_originalSource": "https://github.com/nemento/nemento-timepicker.git",
+  "_direct": true
+}
