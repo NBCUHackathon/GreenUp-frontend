@@ -30,7 +30,7 @@ function checkDist () {
 		var facilityKeys = [];
 		var desiredLon = -81.2989;
 		var desiredLat = 28.4158;
-		desiredDist = document.querySelector('#search-page').shadowRoot.querySelector('#radius').value;
+		desiredDist = document.querySelector('search-page').shadowRoot.querySelector('#radius').value;
 		// console.log('desired distance : '+ desiredDist);
 
 
