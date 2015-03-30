@@ -28,6 +28,8 @@ $(document).ready(function (desiredZip, desiredDist) {
     var facilityKeys = [];
     var desiredLon = -81.2989;
     var desiredLat = 28.4158;
+
+    while(document.querySelector('search-page') === null) console.log("I'm still null");
     desiredDist = document.querySelector('search-page').shadowRoot.querySelector('#radius').value;
     console.log('desired distance : '+ desiredDist);
 
