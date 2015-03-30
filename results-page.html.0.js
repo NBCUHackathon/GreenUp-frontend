@@ -56,10 +56,41 @@ Polymer('results-page', {
     },
 
     updateLists: function() {
+        if(accepted.length === 0){
+            //accepted.push({"name": "No accepted offers"});
+            var list = document.querySelector("results-page").shadowRoot.querySelector("#listAccepted");
+            var d = document.querySelector("results-page").shadowRoot.querySelector("#defaultAccepted");
+            d.style.display = "block";
+        } else {
+            var d = document.querySelector("results-page").shadowRoot.querySelector("#defaultAccepted");
+            d.style.display = "none";
+        }
         this.$.listAccepted.data = accepted;
+
+        if(pending.length === 0) {
+            //pending.push({"name": "No pending offers"});
+            var list = document.querySelector("results-page").shadowRoot.querySelector("#listPending");
+            var d = document.querySelector("results-page").shadowRoot.querySelector("#defaultPending");
+            d.style.display = "block";
+
+            list.removeChild( list.childNodes[ list.childNodes.length - 1 ] );
+            list.appendChild(d);
+        } else {
+            var d = document.querySelector("results-page").shadowRoot.querySelector("#defaultPending");
+            d.style.display = "none";
+        }
         this.$.listPending.data = pending;
+
+        if(declined.length === 0) {
+            //declined.push({"name": "No declined offers"});
+            var list = document.querySelector("results-page").shadowRoot.querySelector("#listDeclined");
+            var d = document.querySelector("results-page").shadowRoot.querySelector("#defaultDeclined");
+            d.style.display = "block";
+        } else {
+            var d = document.querySelector("results-page").shadowRoot.querySelector("#defaultDeclined");
+            d.style.display = "none";
+        }
         this.$.listDeclined.data = declined;
-        console.log("updated list");
     },
 
     domReady: function () {
@@ -112,13 +143,40 @@ Polymer('results-page', {
         //},
         //    {"name": "Golf Master", "cost": "2.34", "status": "Declined", "date": "Wed, March 7", "time": "16:42"}];
 
-        if(accepted.length === 0) accepted.push({"name": "No accepted offers"});
+        if(accepted.length === 0){
+            //accepted.push({"name": "No accepted offers"});
+            var list = document.querySelector("results-page").shadowRoot.querySelector("#listAccepted");
+            var d = document.querySelector("results-page").shadowRoot.querySelector("#defaultAccepted");
+            d.style.display = "block";
+        } else {
+            var d = document.querySelector("results-page").shadowRoot.querySelector("#defaultAccepted");
+            d.style.display = "none";
+        }
         this.$.listAccepted.data = accepted;
 
-        if(pending.length === 0) pending.push({"name": "No pending offers"});
+        if(pending.length === 0) {
+            //pending.push({"name": "No pending offers"});
+            var list = document.querySelector("results-page").shadowRoot.querySelector("#listPending");
+            var d = document.querySelector("results-page").shadowRoot.querySelector("#defaultPending");
+            d.style.display = "block";
+
+            list.removeChild( list.childNodes[ list.childNodes.length - 1 ] );
+            list.appendChild(d);
+        } else {
+            var d = document.querySelector("results-page").shadowRoot.querySelector("#defaultPending");
+            d.style.display = "none";
+        }
         this.$.listPending.data = pending;
 
-        if(declined.length === 0) declined.push({"name": "No declined offers"});
+        if(declined.length === 0) {
+            //declined.push({"name": "No declined offers"});
+            var list = document.querySelector("results-page").shadowRoot.querySelector("#listDeclined");
+            var d = document.querySelector("results-page").shadowRoot.querySelector("#defaultDeclined");
+            d.style.display = "block";
+        } else {
+            var d = document.querySelector("results-page").shadowRoot.querySelector("#defaultDeclined");
+            d.style.display = "none";
+        }
         this.$.listDeclined.data = declined;
     },
 
@@ -184,6 +242,15 @@ Polymer('results-page', {
     },
 
     book: function (event, detail, sender) {
+        var t = document.querySelector("paper-toast");
+
+        if(this.listToBook.length > 0) {
+            t.text = "Tee times booked!";
+            t.show();
+        } else {
+            t.text = "Choose at least one tee time."
+            t.show();
+        }
         console.dir("booking.. " + JSON.stringify(this.listToBook));
     },
 

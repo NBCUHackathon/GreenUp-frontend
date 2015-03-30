@@ -22,8 +22,19 @@ body {
     margin-left: 0;
 }
 
-#search, #login {
+#search {
+    background-color: rgb(240, 240, 240);
+    color: black;
+    -webkit-transition: all 1s ease;
+    -moz-transition: all 1s ease;
+    -ms-transition: all 1s ease;
+    -o-transition: all 1s ease;
+    transition: all 1s ease;
+}
+
+#login {
     background-color: #B6AD93;
+    color: white;
     -webkit-transition: all 1s ease;
     -moz-transition: all 1s ease;
     -ms-transition: all 1s ease;
@@ -33,6 +44,7 @@ body {
 
 #results {
     background-color: #CBC2A7;
+    color: white;
     -webkit-transition: all 1s ease;
     -moz-transition: all 1s ease;
     -ms-transition: all 1s ease;
@@ -47,7 +59,6 @@ body {
 #search, #results, #login {
 	cursor: pointer;
     padding: 20px;
-    color: white;
 }
 
 #login-window {
@@ -56,6 +67,14 @@ body {
 }
 #login-window .poly-btn {
 	background: #6C9A33;
+}
+
+#results-page {
+	background: red;
+}
+.list-title {
+	font-size: 20px;
+	margin-top: -20px;
 }
 
 .open-below {
@@ -69,4 +88,13 @@ body {
     -o-transition: all 1s ease;
     transition: all 1s ease;
     opacity: 0;
+}
+
+
+#cred {
+    position: absolute;
+    bottom: 10px;
+    font-size: 14px;
+    color: grey;
+    text-align: center;
 }

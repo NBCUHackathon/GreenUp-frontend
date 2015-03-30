@@ -6,7 +6,7 @@
     overflow: hidden;
     border-bottom: 1px solid lightgrey;
     transition: background 0.5s ease-in-out;
-    padding: 25px 20px 0 20px;
+    padding: 20px 20px 0 10px;
 }
 
 .list-item div {
@@ -24,6 +24,25 @@
     padding: 10px 20px 0 20px;
     font-size: 14px;
 }
+
+.list-title {
+    margin-top: -5px;
+}
+
+@media screen and (min-width: 280px) and (max-width: 800px) {
+    .list-title {
+        margin-top: -15px;
+        font-size: 12px !important;
+    }
+    .list-title .bold {
+        font-weight: 400;
+    }
+    .list-content {
+        font-size: 12px !important;
+        margin-top: -10px;
+    }
+}
+
 
 .list-type {
     box-sizing: border-box;
@@ -119,4 +138,21 @@ a, a:hover {
 
 .check {
     margin-left: 12px;
+}
+
+.defaultDeclined, .defaultAccepted, .defaultPending {
+    height: 100%;
+    background-color: white;
+    padding: 25px;
+    font-weight: 600;
+    border: 1px solid lightgrey;
+}
+
+paper-checkbox::shadow #ink[checked] {
+    color: #B6AD93;
+}
+
+paper-checkbox::shadow #checkbox.checked {
+    background-color: #B6AD93;
+    border-color: #B6AD93;
 }

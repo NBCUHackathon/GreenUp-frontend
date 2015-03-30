@@ -14,6 +14,25 @@ function showPage(index) {
         //var socket = io('http://45.55.134.215:9999');
         socket.emit("reservations.get.golfer");
 
+        // Set selected
+        var res = document.querySelector("#results");
+        res.style.backgroundColor = "rgb(240, 240, 240)";
+        res.style.color = "black";
+
+        // Unset previous
+        var res = document.querySelector("#search");
+        res.style.backgroundColor = "#B6AD93";
+        res.style.color = "white";
+    } else if(index === 0) {
+        // Set selected
+        var res = document.querySelector("#search");
+        res.style.backgroundColor = "rgb(240, 240, 240)";
+        res.style.color = "black";
+
+        // Unset previous
+        var res = document.querySelector("#results");
+        res.style.backgroundColor = "#B6AD93";
+        res.style.color = "white";
     }
 }
 

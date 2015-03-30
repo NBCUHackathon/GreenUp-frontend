@@ -1,3 +1,6 @@
+<meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+<meta name="mobile-web-app-capable" content="yes">
+
 <link rel="import" href="bower_components/polymer/polymer.html">
 <link rel="import" href="bower_components/core-list/core-list.html">
 <link rel="import" href="bower_components/core-input/core-input.html">
@@ -19,20 +22,20 @@
         <link rel="stylesheet" href="search-page.css">
         <section id="search-page-section">
             <div id="search-page-div">
-                <h1 id="search-page-h1">Search for tee times</h1>
                 <paper-shadow class="search-page-paper-shadow">
                     <div vertical layout>
                         <div>
-                            <div class="questionTitle">Where would you like to golf?</div>
+                            <div class="questionTitle" style="margin-bottom: 20px;">Where would you like to golf?</div>
                             <paper-input-decorator label="Zip code" id="zipCode">
-                                <input id="zipCodeInput" is="core-input" maxlength="5" required>
+                                <input id="zipCodeInput" is="core-input" maxlength="5" required onkeyup="checkZip()">
                             </paper-input-decorator>
                         </div>
 
                         <div style="margin-top: 25px;">
                             <div class="questionTitle">How many miles are you willing to travel?</div>
-                            <paper-slider min="10" max="200" value="110" pin id="radius"
-                                          style=" width: 330px; margin-top: 25px;"></paper-slider>
+
+                            <paper-slider min="5" max="200" value="10" pin id="radius"
+                                          style=" width: 300px; margin-top: 25px;" onkeyup="checkDist()"></paper-slider>
                         </div>
                     </div>
                 </paper-shadow>
@@ -45,22 +48,26 @@
 
                 <paper-shadow class="search-page-paper-shadow" style="margin-top: 30px;">
                     <div vertical layout>
-                        <div class="questionTitle">When would you like to golf?</div>
-                        <div horizontal layout>
+                        <div class="questionTitle" style="margin-bottom: 20px;">When would you like to golf?</div>
+                        <div vertical layout wrap style="width: 400px">
                             <template id="sandbox" is="auto-binding">
-                                <div style="margin-left: -20px;">
+                                <div>
                                     <d-calendar selectedDate="{{selectedDate}}" date="{{date}}" class="light-theme"
                                                 on-d-calendar-date-selected="{{dateSelected}}"></d-calendar>
                                 </div>
                             </template>
 
-                            <div style="margin: 50px 0 0 20px;">
-                                <div class="questionTitle">Start Time</div>
-                                <nemento-timepicker ampm="false" valign="bottom" step="10"
-                                                    id="startTime"></nemento-timepicker>
-                                <div class="questionTitle" style="margin-top: 30px;">End Time</div>
-                                <nemento-timepicker ampm="false" valign="bottom" step="10"
-                                                    id="endTime"></nemento-timepicker>
+                            <div horizontal layout style="margin-left: 20px;">
+                                <div>
+                                    <div class="questionTitle">Start Time</div>
+                                    <nemento-timepicker ampm="false" valign="bottom" step="10"
+                                                        id="startTime" style="margin-left: -10px;width: 95px;padding-right: 50px;"></nemento-timepicker>
+                                </div>
+                                <div>
+                                    <div class="questionTitle">End Time</div>
+                                    <nemento-timepicker ampm="false" valign="bottom" step="10"
+                                                        id="endTime" style="margin-left: -10px;width: 95px;padding-right: 50px;"></nemento-timepicker>
+                                </div>
                             </div>
                         </div>
 
@@ -69,10 +76,10 @@
 
                 <paper-shadow class="search-page-paper-shadow" style="margin-top: 30px;">
                     <div vertical layout>
-                        <div style="margin-top: 25px;">
+                        <div>
                             <div class="questionTitle">What is the most you are willing to pay?</div>
                             <paper-slider min="10" max="200" value="110" pin id="maxPrice"
-                                          style=" width: 330px; margin-top: 25px;"></paper-slider>
+                                          style=" width: 300px; margin-top: 25px;"></paper-slider>
                         </div>
                     </div>
                 </paper-shadow>

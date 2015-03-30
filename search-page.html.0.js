@@ -27,12 +27,7 @@ Polymer('search-page', {
             var e = endTime;
 
             console.log(s + "," + e + " " + typeof s);
-            //if(s.toString().charAt(s.length-1) === 'Z'){
-            //    s = s.splice(0, -1);
-            //}
-            //if(e.toString().charAt(e.length-1) === 'Z'){
-            //    e = e.splice(0, -1);
-            //}
+
             console.log(s.toISOString());
             var j = {"zip": zip, "radius": radius, "start": s.toISOString(), "end": e.toISOString(), "maxPrice": maxPrice};
             if(j.start.toString().charAt(j.start.length-1) === 'Z'){
@@ -44,6 +39,9 @@ Polymer('search-page', {
 
             socket.emit("reservation.sent", j);
             console.log("sending: " + JSON.stringify(j));
+            var t = document.querySelector("paper-toast");
+            t.text = "Preferences submitted! Go to the results tab to see your status.";
+            t.show();
         });
 
         document.querySelector('search-page').shadowRoot.querySelector("#startTime").addEventListener('changed', function (e, d) {
