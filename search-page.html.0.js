@@ -90,12 +90,14 @@ Polymer('search-page', {
         });
 
         //doMyMap();
-        initMap();
+        //this.map = initMap(this.map);
 
         //recieve the facilities and load the markers
         socket.on('facilities.receiveFacilitiesByLatLonRange', function(data) {
-            goToZipCenter(this.map);
+            this.map = initMap(this.map);
             console.log("map: " + this.map);
+            //goToZipCenter(this.map);
+            this.map.panTo(new google.maps.LatLng(desiredLat, desiredLon));
             loadMarkers(jsonFacilitiesToMarkers(data.facilities));
         });
     },
@@ -128,7 +130,10 @@ function initMap() {
         zoom: 10,
         center: new google.maps.LatLng(28.601648, -81.200306)
     };
-    this.map = new google.maps.Map(document.querySelector('search-page').shadowRoot.querySelector('#googleMap'), mapOptions);
+    map = new google.maps.Map(document.querySelector('search-page').shadowRoot.querySelector('#googleMap'), mapOptions);
+    console.log("init map: " + map);
+
+    return map;
 
 }
 
