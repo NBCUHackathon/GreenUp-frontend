@@ -2,7 +2,7 @@ var desiredZip = 32826;
 var desriedDist = 10;
 function checkZip () {
 	console.log('checkxin zip');
-	desiredZip = document.querySelector('#search-page').shadowRoot.querySelector('#zipCodeInput').value;
+	desiredZip = document.querySelector('search-page').shadowRoot.querySelector('#zipCodeInput').value;
 
 	if (desiredZip.length == 5) {
 		console.log('go!');
@@ -10,7 +10,7 @@ function checkZip () {
 	}
 }
 function checkDist () {
-	desiredDist = document.querySelector('#search-page').shadowRoot.querySelector('#radius').value;
+	desiredDist = document.querySelector('search-page').shadowRoot.querySelector('#radius').value;
 
 	if (desiredZip.length == 5) {
 		console.log('go!');
@@ -53,7 +53,7 @@ function checkDist () {
 		    zoom: 10,
 		    center: new google.maps.LatLng(28.601648, -81.200306)
 		  };
-		  map = new google.maps.Map(document.querySelector('#search-page').shadowRoot.querySelector('#googleMap'), mapOptions);
+		  map = new google.maps.Map(document.querySelector('search-page').shadowRoot.querySelector('#googleMap'), mapOptions);
 
 		}
 
@@ -120,7 +120,7 @@ function checkDist () {
 		}
 
 		function checkZip () {
-			desiredZip = document.querySelector('#search-page').shadowRoot.querySelector('#zipCodeInput').value;
+			desiredZip = document.querySelector('search-page').shadowRoot.querySelector('#zipCodeInput').value;
 			if (desiredZip.length == 5) { 
 				socket.emit('facilities.getLatLonFromZip', {zip: desiredZip});
 			}
