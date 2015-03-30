@@ -1,5 +1,6 @@
 /**
  * Created by isabella on 3/28/15.
+ * Maps by Alex Horan.
  */
 var startTime, endTime;
 var desiredZip = 32826;
@@ -11,8 +12,6 @@ var facilitiesInArea = [];
 var facilityKeys = [];
 var desiredLon = -81.2989;
 var desiredLat = 28.4158;
-
-//var socket = io('http://45.55.134.215:9999');
 
 Polymer('search-page', {
 
@@ -89,14 +88,11 @@ Polymer('search-page', {
             socket.emit('facilities.getFacilityByLatLonAndRange', {lat: desiredLat, lon: desiredLon, range: desiredDist, zip: desiredZip});
         });
 
-        //doMyMap();
-        //this.map = initMap(this.map);
-
-        //recieve the facilities and load the markers
+        //receive the facilities and load the markers
         socket.on('facilities.receiveFacilitiesByLatLonRange', function(data) {
             this.map = initMap(this.map);
             console.log("map: " + this.map);
-            //goToZipCenter(this.map);
+
             this.map.panTo(new google.maps.LatLng(desiredLat, desiredLon));
             loadMarkers(jsonFacilitiesToMarkers(data.facilities));
         });
@@ -177,12 +173,6 @@ function addMarkerEvent(marker) {
         court_id = marker.id;
         infowindow.open(this.map,this);
     });
-}
-
-function goToZipCenter(map) {
-    //Got result, center the map and put it out there
-    console.log(desiredLat + " " +desiredLon);
-    map.panTo(new google.maps.LatLng(desiredLat, desiredLon));
 }
 
 //courseID is the number key of the course
